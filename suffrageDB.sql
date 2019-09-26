@@ -1,0 +1,1 @@
+SELECT * FROM suffragedb.sffrg_question;
