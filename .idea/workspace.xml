@@ -14,8 +14,20 @@
   <component name="ProjectId" id="1RHz09UzOZaMwSJCfot2JQZVmTC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sffrg/templates/sffrg" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Grad Project\suffrage\sffrg\templates\sffrg" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Grad Project\suffrage\sffrg\templates\registration" />
+      <recent name="E:\Grad Project\suffrage\sffrg\templates" />
+      <recent name="E:\Grad Project\suffrage\templates" />
+      <recent name="E:\Grad Project\suffrage\sffrg\templates\sffrg" />
+      <recent name="E:\Grad Project\suffrage\suffrage\templates" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -41,6 +53,9 @@
       <updated>1569338583109</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
