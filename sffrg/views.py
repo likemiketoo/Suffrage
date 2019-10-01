@@ -11,7 +11,7 @@ from .models import Election, Candidate
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
     context = {
-        'test_string': "Working as intended",
+        'test_string': "Working as intended!",
     }
     return render(request, "sffrg/home.html", context)
 
