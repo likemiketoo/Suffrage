@@ -56,7 +56,7 @@ ROOT_URLCONF = 'suffrage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [os.path.join(BASE_DIR, 'sffrg\\templates\\registration')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'sffrg\\templates')],
         'DIRS': [
             'sffrg\\templates\\sffrg',
             'sffrg\\templates\\registration',
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'suffrage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'suffrageDB',
+        'NAME': 'testdb',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',
@@ -127,6 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# AUTH_USER_MODEL = 'sffrg.CustomUser'
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/sffrg/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
