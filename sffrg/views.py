@@ -28,7 +28,9 @@ def election_view(request):
 
 def candidate_view(request, election_id):
     # Return the last five published questions.
-    candidates = Candidate.objects.all()
+    election_id = election_id
+    # candidates = Candidate.objects.all()
+    candidates = Election.objects.get(pk=election_id).candidate_set.all()
     context = {
         'candidates': candidates
     }

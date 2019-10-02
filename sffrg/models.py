@@ -37,7 +37,7 @@ class Candidate(models.Model):
     # Self explanatory
     state = models.CharField(max_length=2, default='VA')
     party = models.CharField(max_length=20)
-    votes = models.IntegerField(default=0)
+    votes = models.IntegerField(default=0, editable=False)
 
     def __str__(self):
         return self.full_name

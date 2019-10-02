@@ -31,14 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'sffrg.apps.SffrgConfig',
+    # My Apps
+    # 'sffrg.apps.SffrgConfig',
+    # 'accounts.apps.AccountsConfig',
+    'sffrg',
+    'accounts',
+
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +77,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# Overrides default user object with my custom one
+AUTH_USER_MODEL = "accounts.Account"
 
 WSGI_APPLICATION = 'suffrage.wsgi.application'
 
@@ -109,6 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
