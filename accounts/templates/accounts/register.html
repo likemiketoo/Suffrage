@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div>
+    <h2>
+        Registration Page
+    </h2>
+     <!-- When user clicks button, execute post request-->
+     <form method="post">
+         <!-- Django security token that expires on idle, needed for forms -->
+         {% csrf_token %}
+
+         {% for field in registration_form %}
+            <p>
+                {{ field.label_tag }}
+                {{ field }}
+
+                <!-- If the field has help text, display it -->
+                {% if field.help_text %}
+                    <small style="color:grey;">
+                        {{ field.help_text }}
+                    </small>
+                {% endif %}
+
+                <!-- If an error is raised, print it here -->
+                {% for error in field.errors%}
+                    <p style="color:red;">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+
+         {% endfor %}
+
+         <!-- When clicked, execute submit, and do form action -->
+        <button type="submit">
+            Register
+        </button>
+     </form>
+ </div>
+{% endblock content%}

@@ -19,11 +19,10 @@ def profile_view(request):
 
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
-    tot = Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
+    # tot = Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
 
     context = {
         'test_string': "Working as intended!",
-        'tot': tot,
     }
     return render(request, "sffrg/home.html", context)
 
@@ -35,7 +34,7 @@ def election_view(request):
         'elections': elections
     }
 
-    return render(request, "sffrg/index.html", context)
+    return render(request, "sffrg/elections.html", context)
 
 
 def candidate_view(request, election_id):
@@ -54,11 +53,11 @@ def candidate_view(request, election_id):
         'candidates': candidates,
     }
 
-    return render(request, "sffrg/index2.html", context, election_id)
+    return render(request, "sffrg/candidates.html", context, election_id)
 
 
 # class IndexView(generic.ListView):
-#     template_name = 'sffrg/index.html'
+#     template_name = 'sffrg/elections.html'
 #     context_object_name = 'latest_question_list'
 #
 #     def get_queryset(self):
