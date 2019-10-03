@@ -78,9 +78,6 @@ TEMPLATES = [
     },
 ]
 
-# Overrides default user object with my custom one
-AUTH_USER_MODEL = "accounts.Account"
-
 WSGI_APPLICATION = 'suffrage.wsgi.application'
 
 
@@ -102,33 +99,35 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
+# * * * * * * * * * * * * * * * * * * * * * * * * *
+# MAKE SURE COMMENTS ARE REMOVED WHEN DONE DEVELOPING
+# * * * * * * * * * * * * * * * * * * * * * * * * *
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
-DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -136,6 +135,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+DATE_INPUT_FORMATS = ['%m/%d/%Y']
+DATE_FORMAT = "m-d-Y"
+# Overrides default user object with my custom one
+AUTH_USER_MODEL = "accounts.Account"
 # AUTH_USER_MODEL = 'sffrg.CustomUser'
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/sffrg/'

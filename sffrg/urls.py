@@ -8,6 +8,7 @@ from . import views
 app_name = 'sffrg'
 urlpatterns = [
     path('', views.home_screen_view, name="home"),
+    path('profile', views.profile_view, name="profile"),
     path('elections', views.election_view, name="election"),
     path('election<int:election_id>/candidates', views.candidate_view, name="candidate"),
     # path('', views.IndexView.as_view(), name='index'),

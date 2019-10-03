@@ -43,7 +43,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-# Create your models here.
+# Custom User Model
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=20)

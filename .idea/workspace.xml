@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
+      <change afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/migrations/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/index2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/suffrage/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/suffrage/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +30,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/sffrg/templates/sffrg" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -138,7 +144,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/sffrg/models.py</url>
-          <line>22</line>
+          <line>23</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -1,6 +1,6 @@
 import datetime
-
 from django.db import models
+from django.db.models import Sum
 from django.utils import timezone
 
 from django.contrib.auth.models import User
@@ -8,7 +8,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-# Election Models
 class Election(models.Model):
     # Title of Election
     title = models.CharField(max_length=60)
@@ -16,6 +15,8 @@ class Election(models.Model):
     description = models.TextField(help_text="Enter election description here", blank=True)
     # When the election posted
     pub_date = models.DateTimeField(auto_now_add=True, blank=True)
+
+    total_votes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -31,7 +32,7 @@ class Election(models.Model):
 # Candidate Model
 class Candidate(models.Model):
     # Gets the foreign key election from elections
-    election = models.ForeignKey(Election, on_delete=models.CASCADE)
+    election = models.ForeignKey(Election, null=True,on_delete=models.CASCADE)
     # Full nam of candidate
     full_name = models.CharField(max_length=40)
     # Self explanatory
