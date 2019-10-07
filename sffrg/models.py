@@ -10,7 +10,7 @@ from django.dispatch import receiver
 
 class Election(models.Model):
     # Title of Election
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, unique=True)
     # Description of election
     description = models.TextField(help_text="Enter election description here", blank=True)
     # When the election posted
@@ -34,7 +34,7 @@ class Candidate(models.Model):
     # Gets the foreign key election from elections
     election = models.ForeignKey(Election, null=True,on_delete=models.CASCADE)
     # Full nam of candidate
-    full_name = models.CharField(max_length=40)
+    full_name = models.CharField(max_length=63)
     # Self explanatory
     state = models.CharField(max_length=2, default='VA')
     party = models.CharField(max_length=20)

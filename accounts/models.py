@@ -45,10 +45,12 @@ class MyAccountManager(BaseUserManager):
 
 # Custom User Model
 class Account(AbstractBaseUser):
+    # add ID
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     username = models.CharField(max_length=20, unique=True)
+    # Charfield because zip codes can start with 0, Int doesn't support that
     zip_code = models.CharField(max_length=5, blank=True, null=True)
     voted = models.BooleanField(default=False, editable=False)
     dob = models.DateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)

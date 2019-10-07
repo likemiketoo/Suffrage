@@ -22,14 +22,15 @@ def home_screen_view(request):
     # tot = Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
 
     context = {
-        'test_string': "Working as intended!",
+        'test_string': "Working as intended! This is the home screen.",
     }
     return render(request, "sffrg/home.html", context)
 
 
 def election_view(request):
     # Return the last five published questions.
-    elections = Election.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+    # elections = Election.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+    elections = Election.objects.order_by('title')[:5]
     context = {
         'elections': elections
     }
@@ -83,22 +84,22 @@ def candidate_view(request, election_id):
 #     template_name = 'sffrg/results.html'
 #
 #
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        # request.POST accesses submitted data by key name, returns string
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'sffrg/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        # Redirects to another page and returns
-        return HttpResponseRedirect(reverse('sffrg:results', args=(question.id,)))
+# def vote(request, question_id):
+#     question = get_object_or_404(Question, pk=question_id)
+#     try:
+#         # request.POST accesses submitted data by key name, returns string
+#         selected_choice = question.choice_set.get(pk=request.POST['choice'])
+#     except (KeyError, Choice.DoesNotExist):
+#         # Redisplay the question voting form.
+#         return render(request, 'sffrg/detail.html', {
+#             'question': question,
+#             'error_message': "You didn't select a choice.",
+#         })
+#     else:
+#         selected_choice.votes += 1
+#         selected_choice.save()
+#         # Always return an HttpResponseRedirect after successfully dealing
+#         # with POST data. This prevents data from being posted twice if a
+#         # user hits the Back button.
+#         # Redirects to another page and returns
+#         return HttpResponseRedirect(reverse('sffrg:results', args=(question.id,)))

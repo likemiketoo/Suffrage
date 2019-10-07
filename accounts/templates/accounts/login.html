@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div>
+    <h2>
+        Login Page
+    </h2>
+     <!-- When user clicks button, execute post request-->
+     <form method="post">
+         <!-- Django security token that expires on idle, needed for forms -->
+         {% csrf_token %}
+
+         {% for field in login_form %}
+            <p>
+                {{ field.label_tag }}
+                {{ field }}
+            </p>
+
+            <!-- If the field has help text, display it -->
+            {% if field.help_text %}
+                <small style="color:grey;">
+                    {{ field.help_text }}
+                </small>
+            {% endif %}
+        {% endfor %}
+
+        <!-- If an error is raised, print it here -->
+        {% for field in login_form %}
+            {% for error in field.errors %}
+                <p style="color:red;">
+                    {{ error }}
+                </p>
+            {% endfor %}
+        {% endfor %}
+
+        <!-- Shows errors if present-->
+        <!--If any non-field errors are present, do this-->
+        {% if login_form.non_field_errors %}
+            <div style="color:red;">
+                <p>
+                    {{ login_form.non_field_errors }}
+                </p>
+            </div>
+        {% endif %}
+
+         <!-- When clicked, execute submit, and do form action -->
+        <button type="submit">
+            Login
+        </button>
+     </form>
+ </div>
+{% endblock content%}

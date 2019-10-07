@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from .forms import RegistrationForm
+from django.contrib.auth import login, authenticate, logout
+from .forms import RegistrationForm, AccountAuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
@@ -35,6 +35,39 @@ def registration_view(request):
         context['registration_form'] = form
     return render(request, 'accounts/register.html', context)
 
+
+# Logs out user and redirects them to the home page
+def logout_view(request):
+    logout(request)
+    return redirect('sffrg:home')
+
+
+def login_view(request):
+    context = {}
+    # Requests user to see if authenticated or not
+    user = request.user
+    if user.is_authenticated:
+        return redirect('sffrg:home')
+
+    # If the user has tried to login in the past
+    if request.POST:
+        form = AccountAuthenticationForm(request.POST)
+        # Gets uer info
+        if form.is_valid():
+            email = request.POST['email']
+            password = request.POST['password']
+            user = authenticate(email=email, password=password)
+
+            if user:
+                login(request, user)
+                return redirect('sffrg:home')
+
+    else:
+        # Calls account Authentication form that will return an error if the values aren't satisfied
+        form = AccountAuthenticationForm()
+
+    context['login_form'] = form
+    return render(request, 'accounts/login.html', context)
 
 
 # def signup(request):
