@@ -1,3 +1,4 @@
+# Model.py handles how data modeled and stored in the database
 import datetime
 from django.db import models
 from django.db.models import Sum
@@ -8,6 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+# Defines how the election model is put in the database
 class Election(models.Model):
     # Title of Election
     title = models.CharField(max_length=60, unique=True)
@@ -29,7 +31,7 @@ class Election(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 
-# Candidate Model
+# Defines how the candidate model is put in the database
 class Candidate(models.Model):
     # Gets the foreign key election from elections
     election = models.ForeignKey(Election, null=True,on_delete=models.CASCADE)

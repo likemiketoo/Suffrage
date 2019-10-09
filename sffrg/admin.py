@@ -9,6 +9,7 @@ from accounts.forms import AccountCreationForm
 from accounts.models import Account
 
 
+# Defines what user attributes are displayed and editable on the admin page
 class AccountAdmin(UserAdmin):
     add_form = AccountCreationForm
     list_display = ('email', 'username', 'date_joined', 'last_login', 'is_admin',)

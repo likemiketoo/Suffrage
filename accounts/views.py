@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import RegistrationForm, AccountAuthenticationForm
+from .forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
 
+# Defines how navigation fields are navigated and formatted before being passed off for verification
 def registration_view(request):
     context = {}
     # If the request is a POST request, set form
@@ -13,7 +14,7 @@ def registration_view(request):
         # If there's no errors in the form, proceed
         if form.is_valid():
             form.save()
-            # Format for getting data from forms
+            # Makes sure regardless of how the user entered their data that it's always returned in a consistent format
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             first_name = form.cleaned_data.get('first_name')
@@ -21,7 +22,7 @@ def registration_view(request):
             username = form.cleaned_data.get('username')
             zip_code = form.cleaned_data.get('zip_code')
             dob = form.cleaned_data.get('dob')
-            # Put all that information in account
+            # Sends all that information to account for authentication
             account = authenticate(email=email, password=raw_password, first_name=first_name, last_name=last_name, username=username, zip_code=zip_code, dob=dob)
             # Send that information as a login request
             login(request, account)
@@ -42,6 +43,7 @@ def logout_view(request):
     return redirect('sffrg:home')
 
 
+# Logs in user, checks for authentication, then either returns an error or redirects them to home page
 def login_view(request):
     context = {}
     # Requests user to see if authenticated or not
@@ -63,11 +65,42 @@ def login_view(request):
                 return redirect('sffrg:home')
 
     else:
-        # Calls account Authentication form that will return an error if the values aren't satisfied
+        # Calls account Authentication form that will return an error if the values dont meet the requirements
         form = AccountAuthenticationForm()
 
     context['login_form'] = form
     return render(request, 'accounts/login.html', context)
+
+
+# Shows account info
+def account_view(request):
+    context = {}
+    # If user isn't authenticated return them to the login screen
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.POST:
+        # Requests information of the logged in user
+        form = AccountUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        # Presents what the user's current account information is
+        form = AccountUpdateForm(
+            initial=
+            {
+                "email": request.user.email,
+                "username": request.user.username,
+                "zip_code": request.user.zip_code,
+                # Add other authentication information here
+            }
+        )
+    context['account_form'] = form
+    return render(request, 'accounts/account.html', context)
+
+
+
+
 
 
 # def signup(request):

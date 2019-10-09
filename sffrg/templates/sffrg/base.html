@@ -11,7 +11,8 @@
             <div>
                 <p>
                     <a href="{% url 'sffrg:home' %}">home</a> |
-                    <a href="{% url 'logout' %}">logout</a>
+                    <a href="{% url 'logout' %}">logout</a> |
+                    <a href="{% url 'account' %}">Profile</a>
                 </p>
                 <!--Searches url files for 'logout'-->
                 Hello, {{request.user.first_name}}

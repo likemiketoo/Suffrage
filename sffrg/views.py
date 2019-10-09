@@ -8,8 +8,11 @@ from .models import Election, Candidate
 from accounts.models import Account
 
 
+# Defines how the profile screen is presented to the user
 def profile_view(request):
     users = Account.objects.all()
+
+    # Passes off these values for use in the html file
     context = {
         'users': users
     }
@@ -17,20 +20,25 @@ def profile_view(request):
     return render(request, "sffrg/profile.html", context)
 
 
+# Defines how the main splash is presented to the user
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
     # tot = Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
 
+    # Passes off these values for use in the html file
     context = {
         'test_string': "Working as intended! This is the home screen.",
     }
     return render(request, "sffrg/home.html", context)
 
 
+# Defines how the election screen is presented to the user
 def election_view(request):
     # Return the last five published questions.
     # elections = Election.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     elections = Election.objects.order_by('title')[:5]
+
+    # Passes off these values for use in the html file
     context = {
         'elections': elections
     }
@@ -38,6 +46,7 @@ def election_view(request):
     return render(request, "sffrg/elections.html", context)
 
 
+# Defines how the candidate screen is presented to the user
 def candidate_view(request, election_id):
     # Return the last five published questions.
     election_id = election_id
@@ -50,6 +59,7 @@ def candidate_view(request, election_id):
     election_votes.total_votes = vote_sum
     election_votes.save()
 
+    # Passes off these values for use in the html file
     context = {
         'candidates': candidates,
     }

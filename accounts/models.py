@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
+# Defines how both users and superusers(admins) are handled
 class MyAccountManager(BaseUserManager):
     # Defines what happens when a new user is created
     def create_user(self, first_name, last_name, email, username, zip_code, dob, password=None):
@@ -45,7 +46,7 @@ class MyAccountManager(BaseUserManager):
 
 # Custom User Model
 class Account(AbstractBaseUser):
-    # add ID
+    # !!! add ID !!!
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
