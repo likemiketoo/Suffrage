@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
-      <change afterPath="$PROJECT_DIR$/accounts/templates/accounts/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569338583109</updated>
-      <workItem from="1570587937796" duration="11551000" />
+      <workItem from="1570587937796" duration="14651000" />
     </task>
     <task id="LOCAL-00001" summary="Updated database model for candidates and elections, as well as admin page">
       <created>1569910168279</created>

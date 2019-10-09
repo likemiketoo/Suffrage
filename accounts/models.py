@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -46,7 +47,8 @@ class MyAccountManager(BaseUserManager):
 
 # Custom User Model
 class Account(AbstractBaseUser):
-    # !!! add ID !!!
+    # Makes unique id using uuid ver. 4 (may be switched to ver. 5)  a 32 bit alphanumeric key generated from a random 128-bit number
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)

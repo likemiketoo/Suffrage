@@ -15,6 +15,8 @@ def registration_view(request):
         if form.is_valid():
             form.save()
             # Makes sure regardless of how the user entered their data that it's always returned in a consistent format
+            clean = form.cleaned_data
+
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             first_name = form.cleaned_data.get('first_name')
@@ -23,9 +25,10 @@ def registration_view(request):
             zip_code = form.cleaned_data.get('zip_code')
             dob = form.cleaned_data.get('dob')
             # Sends all that information to account for authentication
-            account = authenticate(email=email, password=raw_password, first_name=first_name, last_name=last_name, username=username, zip_code=zip_code, dob=dob)
+            account = form.save()
+            # account = authenticate(email=email, password=raw_password, first_name=first_name, last_name=last_name, username=username, zip_code=zip_code, dob=dob)
             # Send that information as a login request
-            login(request, account)
+            login(request, account, backend='django.contrib.auth.backends.ModelBackend')
             # If login is successful go to homepage
             return redirect('sffrg:home')
         else:
