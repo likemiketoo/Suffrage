@@ -2,11 +2,11 @@
 {% block content %}
  <div>
     <ul>
-        {% for candidate in candidates %}
+        {% for position in positions %}
             <li>
-                <a href="{{candidate.id}}/vote">
-                    {{ candidate.full_name }}
-                    {{ candidate.votes }}
+                <a href="{{position.id}}/candidates">
+                    {{ position.title }}
+
                 </a>
             </li>
         {% endfor %}

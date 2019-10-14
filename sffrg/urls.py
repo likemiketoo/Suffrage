@@ -8,9 +8,10 @@ from . import views
 app_name = 'sffrg'
 urlpatterns = [
     path('', views.home_screen_view, name="home"),
-    path('profile/', views.profile_view, name="profile"),
     path('elections/', views.election_view, name="election"),
-    path('election<int:election_id>/candidates/', views.candidate_view, name="candidate"),
+    path('elections/<int:election_id>/positions/', views.position_view, name="position"),
+    path('elections/<int:election_id>/positions/<int:position_id>/candidates/', views.candidate_view, name="candidate"),
+    path('elections/<int:election_id>/positions/<int:position_id>/candidates/<int:candidate_id>/vote/', views.vote, name='vote'),
     # path('', views.IndexView.as_view(), name='index'),
     # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),

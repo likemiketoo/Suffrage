@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div>
+    <ul>
+        <li>
+            <a href="">
+                {{ selected_candidate.full_name }}
+                {{ selected_candidate.votes }}
+            </a>
+        </li>
+    </ul>
+ </div>
+{% endblock content%}

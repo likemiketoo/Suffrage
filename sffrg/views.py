@@ -1,11 +1,13 @@
-from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.views import generic
 from django.utils import timezone
-from .models import Election, Candidate
+from .models import Election, Candidate, Position
 from accounts.models import Account
+# from .models import Choice, Question
 
 
 # Defines how the profile screen is presented to the user
@@ -20,51 +22,70 @@ def profile_view(request):
     return render(request, "sffrg/profile.html", context)
 
 
-# Defines how the main splash is presented to the user
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
-    # tot = Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
-
-    # Passes off these values for use in the html file
     context = {
         'test_string': "Working as intended! This is the home screen.",
     }
     return render(request, "sffrg/home.html", context)
 
 
-# Defines how the election screen is presented to the user
 def election_view(request):
     # Return the last five published questions.
     # elections = Election.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     elections = Election.objects.order_by('title')[:5]
+    # election_votes = Election.objects.get(pk=election_id)
 
-    # Passes off these values for use in the html file
     context = {
-        'elections': elections
+        'elections': elections,
     }
 
     return render(request, "sffrg/elections.html", context)
 
 
-# Defines how the candidate screen is presented to the user
-def candidate_view(request, election_id):
-    # Return the last five published questions.
+def position_view(request, election_id):
     election_id = election_id
+
+    positions = Election.objects.get(pk=election_id).position_set.all()
+
+    context = {
+        'positions': positions
+    }
+
+    return render(request, "sffrg/positions.html", context, election_id)
+
+
+def candidate_view(request, election_id, position_id):
+    election_id = election_id
+    position_id = position_id
     # candidates = Candidate.objects.all()
-    candidates = Election.objects.get(pk=election_id).candidate_set.all()
-    # Adds up candidate votes of this election, and returns the number
+    # candidates = Election.objects.get(pk=election_id).position.objects.get(pk=position_id).candidate_set.all()
+
+    candidates = Position.objects.get(pk=position_id).candidate_set.all()
+
     vote_sum = candidates.aggregate(Sum('votes')).get('votes__sum', 0.00)
     # Pushes the total amount of votes back to database
+    election_votes = Election.objects.get(pk=election_id)
     election_votes = Election.objects.get(pk=election_id)
     election_votes.total_votes = vote_sum
     election_votes.save()
 
-    # Passes off these values for use in the html file
     context = {
         'candidates': candidates,
     }
 
-    return render(request, "sffrg/candidates.html", context, election_id)
+    return render(request, "sffrg/candidates.html", context, position_id)
+
+
+def vote(request, election_id, position_id, candidate_id):
+    selected_candidate = Candidate.objects.get(pk=candidate_id)
+    # selected_candidate = selected_candidate.full_name
+    selected_candidate.votes += 1
+    selected_candidate.save()
+    context = {
+        'selected_candidate': selected_candidate,
+    }
+    return render(request, "sffrg/vote.html", context, candidate_id)
 
 
 # class IndexView(generic.ListView):

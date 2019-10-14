@@ -1,12 +1,12 @@
 from django.forms import TextInput, Textarea
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
-from sffrg.models import Election, Candidate
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
 from accounts.forms import AccountCreationForm
 from accounts.models import Account
+from sffrg.models import Election, Candidate, Position
+
+# admin.site.register(Election)
 
 
 # Defines what user attributes are displayed and editable on the admin page
@@ -41,52 +41,86 @@ class AccountAdmin(UserAdmin):
     ]
 
 
-# Dictates what candidate fields are viewable/editable from the admin console
 class CandidateAdmin(admin.ModelAdmin):
-    # What's displayed on the summary screen
-    list_display = ('full_name', 'state', 'party', 'votes', 'election')
+
+    list_display = ('full_name', 'position', 'state', 'party', 'election', 'position', 'votes')
     # Non-editable fields
-    readonly_fields = ('votes', )
+    readonly_fields = ('votes',)
 
     fieldsets = [
         ('CANDIDATE INFO', {
-            'fields': ('election', 'full_name', 'state', 'party',),
-                }
-         ),
-    ]
-
-
-# Candidate options within elections
-class CandidateInline(admin.TabularInline):
-    model = Candidate
-    extra = 0
-    fieldsets = [
-        (None, {
-            'fields': ('election', 'full_name', 'state', 'party', 'votes'),
+            'fields': ('election', 'position', 'full_name', 'state', 'party',),
         }
          ),
     ]
+
+
+class CandidateInline(admin.TabularInline):
+    model = Candidate
+    extra = 3
+
+    # fieldsets = [
+    #     (None, {
+    #         'fields': ('election', 'position', 'full_name', 'state', 'party', 'votes'),
+    #     }
+    #      ),
+    # ]
+    fieldsets = [
+        (None, {
+            'fields': ('election', 'full_name', 'state', 'party'),
+        }
+         ),
+    ]
+
+    def save_model(self, request, obj, form, change):
+        obj.position = Position.objects.first()
+        super().save_model(request, obj, form, change)
+
     # Makes text box entry fields smaller
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size': '15'})},
         models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})},
+        # forms.ChoiceField: {'choices': ('President', 'Vice President', 'Secretary', 'Treasurer')},
     }
     readonly_fields = ('votes',)
 
 
-# Dictates what election fields are viewable/editable from the admin console
+class PositionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'election')
+
+    fieldsets = [
+        ('Positions',
+            {
+                'fields': ['title']
+            }
+         ),
+    ]
+
+    inlines = [CandidateInline]
+
+
+class PositionInline(admin.TabularInline):
+
+    model = Position
+    extra = 2
+
+    fieldsets = [
+        (None, {
+            'fields': ('election', 'title'),
+        }
+         ),
+    ]
+
+
 class ElectionAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('ELECTION INFO',
+        (None,
             {
                 'fields': ['title', 'description']
             }
          ),
     ]
-
-    # Candidate.objects.aggregate(Sum('votes')).get('votes__sum', 0.00)
-
-    inlines = [CandidateInline]
+    inlines = [PositionInline]
     list_display = ('title', 'pub_date', 'total_votes')
     list_filter = ['pub_date']
     search_fields = ['title']
@@ -95,7 +129,7 @@ class ElectionAdmin(admin.ModelAdmin):
 admin.site.register(Election, ElectionAdmin)
 admin.site.register(Candidate, CandidateAdmin)
 admin.site.register(Account, AccountAdmin)
-
+admin.site.register(Position, PositionAdmin)
 
 # from .models import Choice, Question
 #

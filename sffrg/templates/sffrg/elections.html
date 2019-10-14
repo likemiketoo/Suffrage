@@ -4,8 +4,9 @@
     <ul>
         {% for election in elections %}
             <li>
-                <a href="election{{election.id}}/candidates">
+                <a href="{{election.id}}/positions">
                     {{ election.title }}
+                     {{ election.total_votes }}
                 </a>
             </li>
         {% endfor %}

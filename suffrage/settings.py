@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     # 'accounts.apps.AccountsConfig',
     'sffrg',
     'accounts',
-
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +77,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'suffrage.wsgi.application'
 
 
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'suffrage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testdb',
+        'NAME': 'testdb2',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',
@@ -99,9 +99,6 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
-# * * * * * * * * * * * * * * * * * * * * * * * * *
-# MAKE SURE COMMENTS ARE REMOVED WHEN DONE DEVELOPING
-# * * * * * * * * * * * * * * * * * * * * * * * * *
 AUTH_PASSWORD_VALIDATORS = [
     # {
     #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -137,9 +134,8 @@ USE_TZ = True
 
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
 DATE_FORMAT = "m-d-Y"
-# Overrides default user object with my custom one
-AUTH_USER_MODEL = "accounts.Account"
 # AUTH_USER_MODEL = 'sffrg.CustomUser'
+AUTH_USER_MODEL = "accounts.Account"
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/sffrg/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
