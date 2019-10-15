@@ -95,6 +95,7 @@ def account_view(request):
                 "email": request.user.email,
                 "username": request.user.username,
                 "zip_code": request.user.zip_code,
+
                 # Add other authentication information here
             }
         )

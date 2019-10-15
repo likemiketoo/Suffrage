@@ -1,15 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import VotedUsers
 
 
-class RegistrationForm(UserCreationForm):
-
-    class Meta:
-        model = User
-        fields = {'username', 'email', 'password1', 'password2', 'first_name', 'last_name'}
-
-    class UserProfileForm(forms.ModelForm):
-        class Meta:
-            model = Profile
+# Defines the fields that appears when an admin manually adds a user
+# class VoteAddForm(forms.ModelForm):
+#
+#     # Defines what aspects from a model this class is utilizing
+#     class Meta:
+#         model = VotedUsers
+#         fields = ('id', 'position')

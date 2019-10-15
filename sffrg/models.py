@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from accounts.models import Account
 
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -41,6 +42,11 @@ class Position(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class VotedUsers(models.Model):
+    id = models.CharField(max_length=40, primary_key=True)
+    position = models.IntegerField(default=0)
 
 
 # Candidate Model

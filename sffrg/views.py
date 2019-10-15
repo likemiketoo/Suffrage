@@ -1,11 +1,10 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import Http404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from .models import Election, Candidate, Position
+from .models import Election, Candidate, Position, VotedUsers
 from accounts.models import Account
 # from .models import Choice, Question
 
@@ -80,10 +79,20 @@ def candidate_view(request, election_id, position_id):
 def vote(request, election_id, position_id, candidate_id):
     selected_candidate = Candidate.objects.get(pk=candidate_id)
     # selected_candidate = selected_candidate.full_name
-    selected_candidate.votes += 1
-    selected_candidate.save()
+    user = request.user.id
+    if VotedUsers.objects.filter(id=user, position=position_id).exists():
+        selected_candidate.votes -= 1
+        selected_candidate.save()
+    else:
+        selected_candidate.votes += 1
+        selected_candidate.save()
+        vu = VotedUsers(id=user, position=position_id)
+        vu.save()
+
     context = {
         'selected_candidate': selected_candidate,
+        'user': user,
+        'pos': position_id
     }
     return render(request, "sffrg/vote.html", context, candidate_id)
 
