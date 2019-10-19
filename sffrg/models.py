@@ -2,6 +2,8 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from encrypted_model_fields.fields import EncryptedCharField
+
 from accounts.models import Account
 
 from django.contrib.auth.models import User
@@ -45,7 +47,7 @@ class Position(models.Model):
 
 
 class VotedUsers(models.Model):
-    id = models.CharField(max_length=40, primary_key=True)
+    id = models.CharField(max_length=100, primary_key=True)
     position = models.IntegerField(default=0)
 
 

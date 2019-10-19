@@ -3,6 +3,11 @@
  <div>
     <a href="{% url 'sffrg:election' %}">
         {{ test_string }}
+        {% if request.user.is_authenticated %}
+            <br>
+            {{ name }}
+        {% else %}
+        {% endif %}
     </a>
  </div>
 {% endblock content%}

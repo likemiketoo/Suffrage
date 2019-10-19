@@ -1,6 +1,27 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+# from cryptography.hazmat.backends import default_backend
+# from cryptography.hazmat.primitives import serialization, hashes
+# from cryptography.hazmat.primitives.asymmetric import padding
+from django.core.signing import Signer
+from encrypted_model_fields.fields import EncryptedCharField, EncryptedDateField, EncryptedEmailField
+
+
+# with open("E:\Grad Project\suffrage\sffrg\key.pem", "rb") as key_file:
+#     private_key = serialization.load_pem_private_key(
+#         key_file.read(),
+#         password=None,
+#         backend=default_backend()
+#     )
+#
+# # Derives private key from public key
+# public_key = private_key.public_key()
+#
+# pub = private_key.public_key().public_bytes(
+#     encoding=serialization.Encoding.PEM,
+#     format=serialization.PublicFormat.SubjectPublicKeyInfo
+# )
 
 
 # Defines how both users and superusers(admins) are handled
@@ -45,18 +66,26 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
+signer = Signer()
+
+
 # Custom User Model
 class Account(AbstractBaseUser):
     # Makes unique id using uuid ver. 4 (may be switched to ver. 5)  a 32 bit alphanumeric key generated from a random 128-bit number
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
+    # email = EncryptedEmailField(verbose_name="email", max_length=60, unique=True)
+    # Uses fernet encryption, which combines 128-bit AES encryption with SHA-156 hashing
+    # first_name = models.CharField(max_length=20)
+    first_name = EncryptedCharField(max_length=20)
+    # last_name = models.CharField(max_length=20)
+    last_name = EncryptedCharField(max_length=20)
     username = models.CharField(max_length=20, unique=True)
     # Charfield because zip codes can start with 0, Int doesn't support that
-    zip_code = models.CharField(max_length=5, blank=True, null=True)
-    voted = models.BooleanField(default=False, editable=False)
-    dob = models.DateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
+    # zip_code = models.CharField(max_length=5, blank=True, null=True)
+    zip_code = EncryptedCharField(max_length=5, blank=True, null=True)
+    # dob = models.DateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
+    dob = EncryptedDateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
 
     # Required for AbstractBaseUser
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)

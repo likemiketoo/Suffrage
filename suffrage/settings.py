@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6-zb6qe4hm@snk=y46bz3-_bvv2im0-$ar*me*os7^7ly(80e1'
 
+FIELD_ENCRYPTION_KEY = 'DNQ1Tem6dI7HL4CvASDN1FC8lIgBw9pY6s03ZJvYXR0='
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'encrypted_model_fields',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +90,7 @@ WSGI_APPLICATION = 'suffrage.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testdb2',
+        'NAME': 'testdb3',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',

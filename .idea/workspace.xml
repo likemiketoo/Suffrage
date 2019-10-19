@@ -2,12 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0002_auto_20191013_1323.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0003_auto_20191013_1415.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0004_auto_20191013_1444.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0005_auto_20191013_1729.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0006_auto_20191013_1917.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0007_auto_20191013_1918.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0008_auto_20191013_1924.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0009_votedusers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0010_votedusers_idnum.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0011_auto_20191014_2019.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0012_auto_20191014_2144.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0013_remove_votedusers_election.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/migrations/0014_auto_20191014_2255.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/vote.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/vote.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/suffrage/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/suffrage/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +113,9 @@
       <workItem from="1571072205401" duration="779000" />
       <workItem from="1571073525386" duration="4316000" />
       <workItem from="1571097953721" duration="10780000" />
-      <workItem from="1571111860275" duration="5073000" />
+      <workItem from="1571111860275" duration="5690000" />
+      <workItem from="1571363174194" duration="137000" />
+      <workItem from="1571363334351" duration="52455000" />
     </task>
     <task id="LOCAL-00001" summary="Updated database model for candidates and elections, as well as admin page">
       <created>1569910168279</created>
@@ -150,7 +169,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/sffrg/models.py</url>
-          <line>24</line>
+          <line>26</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
