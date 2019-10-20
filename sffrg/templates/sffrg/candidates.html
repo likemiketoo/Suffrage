@@ -1,15 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
  <div>
-    <ul>
-        {% for candidate in candidates %}
-            <li>
-                <a href="{{candidate.id}}/vote">
-                    {{ candidate.full_name }}
-                    {{ candidate.votes }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if voted == 0 %}
+        <form id="link" method="POST">
+            {% csrf_token %}
+            {% for candidate in candidates %}
+                <input type="radio" name="choice" value="{{candidate.id}}/vote">{{ candidate.full_name }}
+                <br>
+            {% endfor %}
+            <button type="button" onclick="submitCandidates()">
+                Submit
+            </button>
+        </form>
+    {% elif voted == 1 %}
+        You've already voted for this position!
+        <br>
+    {% endif %}
  </div>
+<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script type = "text/javascript">
+   function submitCandidates() {
+        var ele = document.getElementsByName('choice');
+
+        for(i = 0; i < ele.length; i++) {
+            if(ele[i].checked)
+                open(ele[i].value,'_self');
+        }
+    }
+
+</script>
 {% endblock content%}
+

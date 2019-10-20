@@ -34,3 +34,21 @@
             </a>
     {% endif %}
 {% endblock content %}
+
+{% if voted == 0 %}
+        <form action= "position/{{position.id}}" method="post">
+            {% csrf_token %}
+            {% for candidate in candidates %}
+                 <input type="radio" name="candidate" id="{{candidate.id}}" value="{{candidate.id}}">
+                    <label for="{{candidate.id}}">
+                        {{ candidate.full_name }}
+                        {{ candidate.votes }}
+                    </label>
+                    <br>
+            {% endfor %}
+            <input type="submit" value="Vote">
+        </form>
+    {% elif voted == 1 %}
+        You've already voted for this position!
+        <br>
+    {% endif %}

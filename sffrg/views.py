@@ -1,5 +1,7 @@
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import Election, Candidate, Position, VotedUsers
 from accounts.models import Account
 from django.core.signing import Signer
@@ -8,7 +10,6 @@ from django.core.signing import Signer
 # from cryptography.hazmat.primitives.asymmetric import padding
 # from cryptography.hazmat.primitives.asymmetric import rsa
 # from django.utils import crypto
-# from django.http import Http404, HttpResponse, HttpResponseRedirect
 # from django.urls import reverse
 
 
@@ -115,21 +116,36 @@ def position_view(request, election_id):
 def candidate_view(request, election_id, position_id):
     election_id = election_id
     position_id = position_id
-    # candidates = Candidate.objects.all()
-    # candidates = Election.objects.get(pk=election_id).position.objects.get(pk=position_id).candidate_set.all()
 
-    candidates = Position.objects.get(pk=position_id).candidate_set.all()
+    signer = Signer()
+    user = signer.sign(request.user.id)
 
-    vote_sum = candidates.aggregate(Sum('votes')).get('votes__sum', 0.00)
-    # Pushes the total amount of votes back to database
-    election_votes = Election.objects.get(pk=election_id)
-    election_votes = Election.objects.get(pk=election_id)
-    election_votes.total_votes = vote_sum
-    election_votes.save()
+    if VotedUsers.objects.filter(id=user, position=position_id).exists():
+        voted = 1
+        context = {
+            'voted': voted,
+        }
+        return render(request, "sffrg/candidates.html", context, position_id)
+    else:
+        voted = 0
+        candidates = Position.objects.get(pk=position_id).candidate_set.all()
 
-    context = {
-        'candidates': candidates,
-    }
+        vote_sum = candidates.aggregate(Sum('votes')).get('votes__sum', 0.00)
+        # Pushes the total amount of votes back to database
+        election_votes = Election.objects.get(pk=election_id)
+        election_votes = Election.objects.get(pk=election_id)
+        election_votes.total_votes = vote_sum
+        election_votes.save()
+        context = {
+            'candidates': candidates,
+            'voted': voted,
+        }
+
+        if request.method == 'POST':
+            candidate_id = request.POST['candidate']
+            # candidates = Candidate.objects.all()
+            # candidates = Election.objects.get(pk=election_id).position.objects.get(pk=position_id).candidate_set.all()
+            return HttpResponseRedirect(reverse('sffrg:vote', args=(position_id,)))
 
     return render(request, "sffrg/candidates.html", context, position_id)
 
