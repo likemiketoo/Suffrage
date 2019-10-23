@@ -120,19 +120,25 @@ def candidate_view(request, election_id, position_id):
     signer = Signer()
     user = signer.sign(request.user.id)
 
+    if request.method == 'POST':
+        context = {
+            'test_string': "POST function is working correctly",
+        }
+        return render(request, "sffrg/home.html", context)
+
     if VotedUsers.objects.filter(id=user, position=position_id).exists():
         voted = 1
         context = {
             'voted': voted,
         }
         return render(request, "sffrg/candidates.html", context, position_id)
+
     else:
         voted = 0
         candidates = Position.objects.get(pk=position_id).candidate_set.all()
 
         vote_sum = candidates.aggregate(Sum('votes')).get('votes__sum', 0.00)
         # Pushes the total amount of votes back to database
-        election_votes = Election.objects.get(pk=election_id)
         election_votes = Election.objects.get(pk=election_id)
         election_votes.total_votes = vote_sum
         election_votes.save()
@@ -141,13 +147,13 @@ def candidate_view(request, election_id, position_id):
             'voted': voted,
         }
 
-        if request.method == 'POST':
-            candidate_id = request.POST['candidate']
-            # candidates = Candidate.objects.all()
-            # candidates = Election.objects.get(pk=election_id).position.objects.get(pk=position_id).candidate_set.all()
-            return HttpResponseRedirect(reverse('sffrg:vote', args=(position_id,)))
+        return render(request, "sffrg/candidates.html", context, position_id)
 
-    return render(request, "sffrg/candidates.html", context, position_id)
+        # if request.method == 'POST':
+        #     candidate_id = request.POST['candidate']
+        #     candidates = Candidate.objects.all()
+        #     candidates = Election.objects.get(pk=election_id).position.objects.get(pk=position_id).candidate_set.all()
+        #     return HttpResponseRedirect(reverse('sffrg:vote', args=(position_id,)))
 
 
 def vote(request, election_id, position_id, candidate_id):
@@ -185,13 +191,16 @@ def vote(request, election_id, position_id, candidate_id):
         voted = 1
         # selected_candidate.votes -= 1
         # selected_candidate.save()
+
+    # After user presses submit button, execute post statement and lock user out from voting again
     else:
         voted = 0
-        selected_candidate.votes += 1
-        selected_candidate.save()
-
-        vu = VotedUsers(id=user, position=position_id)
-        vu.save()
+        if request.method == "POST":
+            voted = 1
+            selected_candidate.votes += 1
+            selected_candidate.save()
+            vu = VotedUsers(id=user, position=position_id)
+            vu.save()
 
     context = {
         'selected_candidate': selected_candidate,

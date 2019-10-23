@@ -47,7 +47,7 @@ class Position(models.Model):
 
 
 class VotedUsers(models.Model):
-    id = models.CharField(max_length=100, primary_key=True)
+    id = models.CharField(max_length=100, primary_key=True, unique=True)
     position = models.IntegerField(default=0)
 
 

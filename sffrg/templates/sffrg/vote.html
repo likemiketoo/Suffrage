@@ -4,15 +4,25 @@
     <ul>
         <li>
             {% if voted == 0 %}
-                <a href="">
-                    {{ selected_candidate.full_name }}
-                </a>
+                <form method=POST action="">
+                    {% csrf_token %}
+                    Confirm vote for {{ selected_candidate.full_name }}?
+                    <button type="submit" value="confirm_candidate" onclick="confirmVote()">
+                        Confirm
+                    </button>
+                </form>
             {% elif voted == 1 %}
-                You've already voted for this position!
+                Your vote has been counted for this position!
                 <br>
-                {{ original }}
             {% endif %}
         </li>
     </ul>
  </div>
+<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script type = "text/javascript">
+   function confirmVote()
+   {
+        window.location.reload();
+   }
+</script>
 {% endblock content%}
