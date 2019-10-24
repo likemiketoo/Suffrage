@@ -1,3 +1,247 @@
-li a {
-    color: green;
+body
+{
+	background: #000000;
+    overflow-x: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+#main
+{
+    /*background: #4b515d;*/
+    padding-top: 50px;
+    /*background-image: url("/static/assets/smear2.jpg");*/
+    background-image: url("/static/assets/dawn.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    height: 100%;
+
+    color: white;
+}
+
+.mainContentWrapper
+{
+	/*Fallback for browsers that don't support 'vh'*/
+    height: 100%;
+    height: 100vh;
+	background: #fffef9;
+	padding-left: 0;
+	padding-right: 0;
+	z-index: 1;
+
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+/*Determines how far the page content slides out the way when the menu is activated*/
+.mainContentWrapper.toggled
+{
+	padding-left: 250px;
+}
+
+/*Width and characteristics of slide-out menu*/
+#sidebar-wrapper
+{
+	z-index: 0;
+	position: fixed;
+	left: 250px;
+	width: 0;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+
+	background: #2f363d;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+/*Changes menu width from none to defined width when triggered*/
+.mainContentWrapper.toggled #sidebar-wrapper
+{
+	width: 250px;
+}
+
+/*Defines characteristics for title bar*/
+#titleBar
+{
+    position:fixed;
+	top: 0;
+	height: 50px;
+	width: 100%;
+	z-index: 2;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 10px rgba(0,0,0,0.24);
+	transition: top .5s ease-in-out;
+
+    background-color:rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+#menuIcon
+{
+	position: absolute;
+	padding: 0;
+	padding-top: 7px;
+	background: transparent;
+	margin-top: 4px;
+	height: 42px;
+	width: 42px;
+	border-radius: 25px;
+	/*border: 1px solid white;*/
+	border: 1px solid transparent;
+	opacity: .8;
+	transition: all .5s ease-in-out;
+}
+
+#menuIcon:hover
+{
+	opacity: 1;
+	/*background: #dbdbdb;*/
+    /*backdrop-filter: blur(50px)#ffffff/*border: 1px solid #414c56;*/
+	transition: all .2s ease-in-out;
+}
+
+#menuIcon:hover #menuLineTop
+{
+	width: 35%;
+	background: #ffffff;
+	transform: rotate(30deg)translate(6px, 1px);
+}
+#menuIcon:hover #menuLineMid
+{
+	background: #ffffff;
+}
+#menuIcon:hover #menuLineBot
+{
+	width: 35%;
+	background: #ffffff;
+	transform: rotate(-30deg)translate(6px, -1px);
+}
+
+#menuLineTop, #menuLineMid, #menuLineBot
+{
+	background: #ffffff;
+	padding: 0;
+	width: 50%;
+	height: 2px;
+	margin: 0 auto;
+	margin-top: 5px;
+	transition: all .2s ease-in-out;
+}
+
+/*When the sidebar is toggled, switch direction of button*/
+.mainContentWrapper.toggled #menuIcon:hover #menuLineTop
+{
+	width: 35%;
+	background: #ffffff;
+	transform: rotate(-30deg)translate(-6px, 1px);
+}
+
+.mainContentWrapper.toggled #menuIcon:hover #menuLineBot
+{
+	width: 35%;
+	background: #ffffff;
+	transform: rotate(30deg)translate(-6px, -1px);
+}
+
+/* Defines what sidebar content  */
+.sidebar-nav
+{
+	position: absolute;
+	top: 0;
+	width: 250px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar-nav li
+{
+	text-indent: 20px;
+	line-height: 40px;
+}
+
+.sidebar-nav li a
+{
+	display: block;
+	text-decoration: none;
+	color: #999999;
+	transition: all .2s ease-in-out;
+}
+
+.sidebar-nav li a:hover
+{
+	text-decoration: none;
+	color: #ffffff;
+	background: #d32c42;
+	transition: all .2s ease-in-out;
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus
+{
+	text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand
+{
+	height: 65px;
+	font-size: 18px;
+	line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a
+{
+	color: #999999;
+}
+
+.sidebar-nav>.sidebar-brand a:hover
+{
+	color: #fff;
+	background: none;
+}
+
+/*Outer authentication div*/
+#authenticationOuter
+{
+    height: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    /*border: 1px solid #ffffff;*/
+}
+
+#authenticationBox
+{
+    /*position: relative;*/
+    margin: 0 auto;
+    text-align: center;
+    width: 550px;
+    padding: 50px;
+    /*border: 1px solid #ffffff;*/
+    border-radius: 8px;
+    overflow: hidden;
+    background-color:rgba(255, 255, 255, 0.2);
+
+    backdrop-filter: blur(60px);
+}
+
+
+#footerDivider
+{
+    margin: 0;
+    color: #ffffff;
+    background: #000000;
+}
+
+#footerContent
+{
+    color: #ffffff;
+    background: #000000;
+    margin: 0;
+    padding: 5px 5px 15px;
 }

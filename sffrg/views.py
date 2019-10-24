@@ -1,5 +1,5 @@
 from django.db.models import Sum
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import Election, Candidate, Position, VotedUsers
@@ -67,25 +67,14 @@ def profile_view(request):
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
 
-    user = request.user.id
-    # if request.user.is_authenticated:
-    #     fname = private_key.decrypt(
-    #         request.user.first_name,
-    #         padding.OAEP(
-    #             mgf=padding.MGF1(algorithm=hashes.SHA256()),
-    #             algorithm=hashes.SHA256(),
-    #             label=None
-    #         )
-    #     )
-    #     context = {
-    #         'test_string': "Working as intended! This is the home screen.",
-    #         'name': fname,
-    #     }
-    # else:
-    context = {
-        'test_string': "Working as intended! This is the home screen.",
-    }
-    return render(request, "sffrg/home.html", context)
+    user = request.user
+    if user.is_authenticated:
+        context = {
+            'test_string': "Working as intended! This is the home screen.",
+        }
+        return render(request, "sffrg/home.html", context)
+    else:
+        return redirect('accounts:login')
 
 
 def election_view(request):

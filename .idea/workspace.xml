@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sffrg/static/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sffrg/templates/snippets/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sffrg/templates/snippets/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/candidates.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/candidates.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/vote.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/vote.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,6 +20,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -22,6 +43,8 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/accounts/templates/accounts" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -80,6 +103,21 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@3527dc65" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -100,7 +138,7 @@
       <workItem from="1571363334351" duration="71741000" />
       <workItem from="1571721579097" duration="614000" />
       <workItem from="1571724721831" duration="290000" />
-      <workItem from="1571755470054" duration="23297000" />
+      <workItem from="1571755470054" duration="49694000" />
     </task>
     <task id="LOCAL-00001" summary="Updated database model for candidates and elections, as well as admin page">
       <created>1569910168279</created>
