@@ -2,15 +2,11 @@ from django.db.models import Sum
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.views import generic
 from .models import Election, Candidate, Position, VotedUsers
 from accounts.models import Account
+from django.core import signing
 from django.core.signing import Signer
-# from cryptography.hazmat.backends import default_backend
-# from cryptography.hazmat.primitives import serialization, hashes
-# from cryptography.hazmat.primitives.asymmetric import padding
-# from cryptography.hazmat.primitives.asymmetric import rsa
-# from django.utils import crypto
-# from django.urls import reverse
 
 
 # def gen_key():
@@ -66,12 +62,33 @@ def profile_view(request):
 
 def home_screen_view(request):
     # array, string or variable that can get referenced by html file
+    signer = Signer()
 
     user = request.user
+    vu = VotedUsers.objects.all()
     if user.is_authenticated:
+
+        # Checks to see if any inputs have been tampered and fail unsigning, and removes them
+        for voters in vu:
+            try:
+                test = signer.unsign(voters.id)
+            except signing.BadSignature:
+                malicious_voter = VotedUsers.objects.get(id=voters.id)
+                malicious_voter.delete()
+
+        # Checks to see if theres any values that passed signing, but aren't from registed users and removes them
+        for voters in vu:
+            original_id = signer.unsign(voters.id)
+            if Account.objects.filter(id=original_id).exists():
+                pass
+            else:
+                malicious_voter = VotedUsers.objects.get(id=voters.id)
+                malicious_voter.delete()
+
         context = {
             'test_string': "Working as intended! This is the home screen.",
         }
+
         return render(request, "sffrg/home.html", context)
     else:
         return redirect('accounts:login')
@@ -151,31 +168,8 @@ def vote(request, election_id, position_id, candidate_id):
 
     # Base64 encoded SHA-1 hash
     signer = Signer()
-    # Regular input
-    # user = request.user.id
-    # Hashes input
     user = signer.sign(request.user.id)
-    temp = user.encode('UTF-8')
 
-    # Encrypts input using RSA & Hashes suing SHA256
-    # user_encrypted = public_key.encrypt(
-    #     temp,
-    #     padding.OAEP(
-    #         mgf=padding.MGF1(algorithm=hashes.SHA256()),
-    #         algorithm=hashes.SHA256(),
-    #         label=None
-    #         )
-    # )
-    # # Decrypts
-    # original = private_key.decrypt(
-    #     user_encrypted,
-    #     padding.OAEP(
-    #         mgf=padding.MGF1(algorithm=hashes.SHA256()),
-    #         algorithm=hashes.SHA256(),
-    #         label=None
-    #     )
-    # )
-    #
     if VotedUsers.objects.filter(id=user, position=position_id).exists():
         voted = 1
         # selected_candidate.votes -= 1

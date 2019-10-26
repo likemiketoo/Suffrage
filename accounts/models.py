@@ -75,7 +75,7 @@ class Account(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     # email = EncryptedEmailField(verbose_name="email", max_length=60, unique=True)
-    # Uses fernet encryption, which combines 128-bit AES encryption with SHA-156 hashing
+    # Uses fernet encryption, which combines 128-bit AES encryption with SHA-256 hashing
     # first_name = models.CharField(max_length=20)
     first_name = EncryptedCharField(max_length=20)
     # last_name = models.CharField(max_length=20)

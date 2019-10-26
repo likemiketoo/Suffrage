@@ -4,7 +4,7 @@
     <ul>
         {% for election in elections %}
             <li>
-                <a href="{{election.id}}/positions">
+                <a href="{% url 'sffrg:position' election.id %}">
                     {{ election.title }}
                      {{ election.total_votes }}
                 </a>
