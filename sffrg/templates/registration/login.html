@@ -6,7 +6,7 @@
         <!--Prevent Cross Site Request Forgery Attack-->
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">
+        <button type="submit" id="submitButton">
             Login
         </button>
     </form>

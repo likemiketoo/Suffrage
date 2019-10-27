@@ -3,14 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/static/assets/smear2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/registration/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/elections.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/elections.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/sffrg/positions.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/sffrg/positions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/snippets/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/snippets/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/templates/snippets/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/templates/snippets/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +134,7 @@
       <workItem from="1571721579097" duration="614000" />
       <workItem from="1571724721831" duration="290000" />
       <workItem from="1571755470054" duration="50526000" />
-      <workItem from="1572040364851" duration="19195000" />
+      <workItem from="1572040364851" duration="34398000" />
     </task>
     <task id="LOCAL-00001" summary="Updated database model for candidates and elections, as well as admin page">
       <created>1569910168279</created>

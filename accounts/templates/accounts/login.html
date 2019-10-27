@@ -10,23 +10,22 @@
          <form method="post">
              <!-- Django security token that expires on idle, needed for forms -->
              {% csrf_token %}
+             <label for="InputEmail1" id="authLabel">Email address</label>
+             <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 
-             {% for field in login_form %}
-                <p>
-                    {{ field.label_tag }}
-                    {{ field }}
-                </p>
+             <label for="InputPassword1" id="authLabel">Password</label>
+             <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
 
+            <!-- If an error is raised, print it here -->
+            {% for field in login_form %}
                 <!-- If the field has help text, display it -->
                 {% if field.help_text %}
                     <small style="color:grey;">
                         {{ field.help_text }}
                     </small>
                 {% endif %}
-            {% endfor %}
 
-            <!-- If an error is raised, print it here -->
-            {% for field in login_form %}
+                <!-- Shows errors if present-->
                 {% for error in field.errors %}
                     <p style="color:red;">
                         {{ error }}
@@ -34,7 +33,6 @@
                 {% endfor %}
             {% endfor %}
 
-            <!-- Shows errors if present-->
             <!--If any non-field errors are present, do this-->
             {% if login_form.non_field_errors %}
                 <div style="color:red;">
@@ -45,7 +43,7 @@
             {% endif %}
 
              <!-- When clicked, execute submit, and do form action -->
-            <button type="submit">
+            <button type="submit" class="btn btn-outline-primary" id="submitButton">
                 Login
             </button>
          </form>
