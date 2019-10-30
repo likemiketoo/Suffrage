@@ -1,17 +1,18 @@
 from django.urls import path
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
-
+import random
 from . import views
 
+ran = random.randrange(0, 999, 2)
 
 app_name = 'sffrg'
 urlpatterns = [
     path('', views.home_screen_view, name="home"),
     path('elections/', views.election_view, name="election"),
-    path('elections/<int:election_id>/positions/', views.position_view, name="position"),
-    path('elections/<int:election_id>/positions/<int:position_id>/candidates/', views.candidate_view, name="candidate"),
-    path('elections/<int:election_id>/positions/<int:position_id>/candidates/<int:candidate_id>/vote/', views.vote, name='vote'),
+    path('elections/<str:election_id>/positions/', views.position_view, name="position"),
+    path('positions/<str:position_signed>/candidates/', views.candidate_view, name="candidate"),
+    path('candidates/<str:candidate_signed>/vote/', views.vote, name='vote'),
     # path('', views.IndexView.as_view(), name='index'),
     # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),

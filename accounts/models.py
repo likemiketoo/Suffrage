@@ -86,6 +86,7 @@ class Account(AbstractBaseUser):
     zip_code = EncryptedCharField(max_length=5, blank=True, null=True)
     # dob = models.DateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
     dob = EncryptedDateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
+    
 
     # Required for AbstractBaseUser
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)

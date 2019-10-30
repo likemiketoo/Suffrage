@@ -4,7 +4,7 @@
     <ul>
         {% for position in positions %}
             <li>
-                <a href="{{position.id}}/candidates">
+                <a href="{% url 'sffrg:candidate' position.id %}">
                     {{ position.title }}
                 </a>
             </li>

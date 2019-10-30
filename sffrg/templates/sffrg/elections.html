@@ -6,8 +6,12 @@
             <li>
                 <a href="{% url 'sffrg:position' election.id %}">
                     {{ election.title }}
-                     {{ election.total_votes }}
+                    {{ election.total_votes }}
                 </a>
+                <br>
+                {{ positions }}
+                <br>
+                {{ num }}
             </li>
         {% endfor %}
     </ul>

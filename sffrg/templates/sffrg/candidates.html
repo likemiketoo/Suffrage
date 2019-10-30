@@ -5,7 +5,7 @@
         <form id="link" method="POST">
             {% csrf_token %}
             {% for candidate in candidates %}
-                <input type="radio" name="choice" value="{{candidate.id}}/vote">{{ candidate.full_name }}
+                <input type="radio" name="choice" value="{% url 'sffrg:vote' candidate.id %}">{{ candidate.full_name }}
                 <br>
             {% endfor %}
             <button type="button" onclick="submitCandidates()">
