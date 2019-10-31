@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # from cryptography.hazmat.primitives import serialization, hashes
 # from cryptography.hazmat.primitives.asymmetric import padding
 from django.core.signing import Signer
-from encrypted_model_fields.fields import EncryptedCharField, EncryptedDateField, EncryptedEmailField
+from encrypted_model_fields.fields import EncryptedCharField, EncryptedTextField, EncryptedDateField, EncryptedBooleanField
 
 
 # with open("E:\Grad Project\suffrage\sffrg\key.pem", "rb") as key_file:
@@ -68,6 +68,8 @@ class MyAccountManager(BaseUserManager):
 
 signer = Signer()
 
+GENDER_CHOICES = (('Male', 'Male'), ('Female', 'Female'), ('Prefer Not To Disclose', 'Prefer Not To Disclose'))
+
 
 # Custom User Model
 class Account(AbstractBaseUser):
@@ -76,17 +78,23 @@ class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     # email = EncryptedEmailField(verbose_name="email", max_length=60, unique=True)
     # Uses fernet encryption, which combines 128-bit AES encryption with SHA-256 hashing
-    # first_name = models.CharField(max_length=20)
     first_name = EncryptedCharField(max_length=20)
-    # last_name = models.CharField(max_length=20)
+    middle_name = EncryptedCharField(max_length=20, null=True, blank=True)
     last_name = EncryptedCharField(max_length=20)
     username = models.CharField(max_length=20, unique=True)
-    # Charfield because zip codes can start with 0, Int doesn't support that
-    # zip_code = models.CharField(max_length=5, blank=True, null=True)
+    # Charfield because zip codes can start with 0, Integers can't hold leading 0's
+    street = EncryptedTextField()
+    city = EncryptedCharField(max_length=45)
     zip_code = EncryptedCharField(max_length=5, blank=True, null=True)
-    # dob = models.DateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
     dob = EncryptedDateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
-    
+    citizen = EncryptedBooleanField(default=True)
+    # ssn = EncryptedCharField(max_length=9, unique=True)
+    ssn = EncryptedCharField(max_length=9, blank=True, null=True)
+    gender = models.CharField(max_length=23, choices=GENDER_CHOICES, default="Prefer Not To Disclose")
+    disqualified = EncryptedBooleanField(default=False)
+    restored = EncryptedBooleanField(blank=True, null=True)
+    active_mil = EncryptedBooleanField()
+    sig = EncryptedBooleanField()
 
     # Required for AbstractBaseUser
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)

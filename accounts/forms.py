@@ -16,6 +16,27 @@ class AccountCreationForm(UserCreationForm):
 # Defines how the registration screen is presented to the user
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60, help_text='A valid email address is required')
+    # ssn = forms.CharField(max_length=9, widget=forms.HiddenInput())
+
+    # def clean(self):
+    #     cd = self.cleaned_data
+    #     if cd.get('password') != cd.get('password_confirm'):
+    #         self.add_error('password_confirm', "passwords do not match !")
+    #     return cd
+
+    def clean(self):
+        dat = self.cleaned_data
+        zipco = str(dat.get('zip_code'))
+        if not zipco.isdigit():
+            self.add_error('zip_code', "You must enter a valid zip code")
+
+        if dat.get('disqualified') is True and dat.get('restored') is False:
+            self.add_error('restored', "You are not eligible to vote")
+
+        if dat.get('sig') is False:
+            self.add_error('sig', "Your electronic signature is required")
+
+        return dat
 
     # Defines what aspects from a model this class is utilizing
     class Meta:
