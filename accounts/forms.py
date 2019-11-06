@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from .models import Account
+GENDER_CHOICES = (('Male', 'Male'), ('Female', 'Female'), ('Prefer Not To Disclose', 'Prefer Not To Disclose'))
+BOOLEAN_CHOICES = (('True', 'True'), ('False', 'False'))
+STATE_CHOICES = (('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'), ('CA', 'CA'), ('CO', 'CO'), ('CT', 'CT'), ('DE', 'DE'), ('DC', 'DC'), ('FL', 'FL'), ('GA', 'GA'), ('HI', 'HI'), ('ID', 'ID'), ('IL', 'IL'), ('IN', 'IN'), ('IA', 'IA'), ('KS', 'KS'), ('KY', 'KY'), ('LA', 'LA'), ('ME', 'ME'), ('MD', 'MD'), ('MA', 'MA'), ('MI', 'MI'), ('MN', 'MN'), ('MS', 'MS'), ('MO', 'MO'), ('MT', 'MT'), ('NE', 'NE'), ('NV', 'NV'), ('NH', 'NH'), ('NJ', 'NJ'), ('NM', 'NM'), ('NY', 'NY'), ('NC', 'NC'), ('ND', 'ND'), ('OH', 'OH'), ('OK', 'OK'), ('OR', 'OR'), ('PA', 'PA'), ('RI', 'RI'), ('SC', 'SC'), ('SD', 'SD'), ('TN', 'TN'), ('TX', 'TX'), ('UT', 'UT'), ('VT', 'VT'), ('VA', 'VA'), ('WA', 'WA'), ('WV', 'WV'), ('WY', 'WY'))
 
 
 # Defines the fields that appears when an admin manually adds a user
@@ -17,6 +20,12 @@ class AccountCreationForm(UserCreationForm):
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60, help_text='A valid email address is required')
     # ssn = forms.CharField(max_length=9, widget=forms.HiddenInput())
+    citizen = forms.ChoiceField(choices=BOOLEAN_CHOICES, widget=forms.RadioSelect())
+    # gender = forms.ChoiceField(choices=GENDER_CHOICES, widget=forms.RadioSelect())
+    disqualified = forms.ChoiceField(choices=BOOLEAN_CHOICES, widget=forms.RadioSelect())
+    restored = forms.ChoiceField(choices=BOOLEAN_CHOICES, widget=forms.RadioSelect())
+    active_mil = forms.ChoiceField(choices=BOOLEAN_CHOICES, widget=forms.RadioSelect())
+    sig = forms.ChoiceField(choices=BOOLEAN_CHOICES, widget=forms.RadioSelect())
 
     # def clean(self):
     #     cd = self.cleaned_data
@@ -30,10 +39,19 @@ class RegistrationForm(UserCreationForm):
         if not zipco.isdigit():
             self.add_error('zip_code', "You must enter a valid zip code")
 
-        if dat.get('disqualified') is True and dat.get('restored') is False:
-            self.add_error('restored', "You are not eligible to vote")
+        if dat.get('citizen') == "False":
+            self.add_error('citizen', "You cannot register to vote if you're not a US citizen")
 
-        if dat.get('sig') is False:
+        if dat.get('disqualified') == "True" and dat.get('restored') == "False":
+            self.add_error('restored', "You cannot register to vote if your right to vote has not been restored.")
+
+        if dat.get('gender') == '-':
+            self.add_error('gender', "You must select an option")
+
+        if dat.get('state') == "-":
+            self.add_error('state', "You must select a state")
+
+        if dat.get('sig') == "False":
             self.add_error('sig', "Your electronic signature is required")
 
         return dat
@@ -41,7 +59,7 @@ class RegistrationForm(UserCreationForm):
     # Defines what aspects from a model this class is utilizing
     class Meta:
         model = Account
-        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'username', 'zip_code', 'dob')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'username', 'zip_code', 'dob', 'street', 'city', 'state', 'citizen', 'ssn', 'gender', 'disqualified', 'restored', 'active_mil', 'sig')
 
 
 # Defines how the accounts are presented and authenticated when logging in

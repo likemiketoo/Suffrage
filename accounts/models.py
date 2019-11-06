@@ -69,6 +69,8 @@ class MyAccountManager(BaseUserManager):
 signer = Signer()
 
 GENDER_CHOICES = (('Male', 'Male'), ('Female', 'Female'), ('Prefer Not To Disclose', 'Prefer Not To Disclose'))
+BOOLEAN_CHOICES = (('True', 'True'), ('False', 'False'))
+STATE_CHOICES = (('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'), ('CA', 'CA'), ('CO', 'CO'), ('CT', 'CT'), ('DE', 'DE'), ('DC', 'DC'), ('FL', 'FL'), ('GA', 'GA'), ('HI', 'HI'), ('ID', 'ID'), ('IL', 'IL'), ('IN', 'IN'), ('IA', 'IA'), ('KS', 'KS'), ('KY', 'KY'), ('LA', 'LA'), ('ME', 'ME'), ('MD', 'MD'), ('MA', 'MA'), ('MI', 'MI'), ('MN', 'MN'), ('MS', 'MS'), ('MO', 'MO'), ('MT', 'MT'), ('NE', 'NE'), ('NV', 'NV'), ('NH', 'NH'), ('NJ', 'NJ'), ('NM', 'NM'), ('NY', 'NY'), ('NC', 'NC'), ('ND', 'ND'), ('OH', 'OH'), ('OK', 'OK'), ('OR', 'OR'), ('PA', 'PA'), ('RI', 'RI'), ('SC', 'SC'), ('SD', 'SD'), ('TN', 'TN'), ('TX', 'TX'), ('UT', 'UT'), ('VT', 'VT'), ('VA', 'VA'), ('WA', 'WA'), ('WV', 'WV'), ('WY', 'WY'))
 
 
 # Custom User Model
@@ -85,16 +87,17 @@ class Account(AbstractBaseUser):
     # Charfield because zip codes can start with 0, Integers can't hold leading 0's
     street = EncryptedTextField()
     city = EncryptedCharField(max_length=45)
+    state = EncryptedCharField(max_length=2, choices=STATE_CHOICES)
     zip_code = EncryptedCharField(max_length=5, blank=True, null=True)
     dob = EncryptedDateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
-    citizen = EncryptedBooleanField(default=True)
+    citizen = EncryptedCharField(max_length=5, default=True)
     # ssn = EncryptedCharField(max_length=9, unique=True)
     ssn = EncryptedCharField(max_length=9, blank=True, null=True)
     gender = models.CharField(max_length=23, choices=GENDER_CHOICES, default="Prefer Not To Disclose")
-    disqualified = EncryptedBooleanField(default=False)
-    restored = EncryptedBooleanField(blank=True, null=True)
-    active_mil = EncryptedBooleanField()
-    sig = EncryptedBooleanField()
+    disqualified = EncryptedCharField(max_length=5, default=False)
+    restored = EncryptedCharField(max_length=5, default=False, null=True, blank=True)
+    active_mil = EncryptedCharField(max_length=5)
+    sig = EncryptedCharField(max_length=5, default=False)
 
     # Required for AbstractBaseUser
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)

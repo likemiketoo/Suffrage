@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
+from django.urls import reverse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
@@ -13,7 +15,7 @@ def registration_view(request):
         form = RegistrationForm(request.POST)
         # If there's no errors in the form, proceed
         if form.is_valid():
-            form.save()
+            # form.save()
             # Makes sure regardless of how the user entered their data that it's always returned in a consistent format
             clean = form.cleaned_data
 
@@ -26,6 +28,7 @@ def registration_view(request):
             username = form.cleaned_data.get('username')
             street = form.cleaned_data.get('street')
             city = form.cleaned_data.get('city')
+            state = form.cleaned_data.get('state')
             zip_code = form.cleaned_data.get('zip_code')
             dob = form.cleaned_data.get('dob')
             citizen = form.cleaned_data.get('citizen')
@@ -48,7 +51,7 @@ def registration_view(request):
     else:
         form = RegistrationForm()
         context['registration_form'] = form
-    return render(request, 'accounts/register.html', context)
+    return render(request, 'accounts/register2.html', context)
 
 
 # Logs out user and redirects them to the home page

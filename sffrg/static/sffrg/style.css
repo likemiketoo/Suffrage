@@ -13,6 +13,7 @@ body
 #main
 {
     /*background: #4b515d;*/
+    padding-left: 0;
     padding-top: 100px;
     /*background-image: url("/static/assets/smear2.jpg");*/
     /*background-image: url("/static/assets/CustomGradient.png");*/
@@ -241,6 +242,7 @@ body
     height: 80vh;
     display: flex;
     align-items: center;
+    margin: 0;
     /*border: 1px solid #ffffff;*/
 }
 
@@ -259,15 +261,24 @@ body
     backdrop-filter: blur(60px);
 }
 
-#InputEmail1, #InputPassword1, #InputNames, #InputUsername, #InputZip, #InputDob
+#voteCitizen
+{
+    padding: 0;
+    margin: 0;
+}
+
+#InputEmail1, #InputPassword1, #InputNames, #InputNamesf, #InputUsername, #InputZip, #InputDob, #InputSSN, #InputGender, #InputStreet, #InputCity, #InputState
 {
     opacity: 0.5;
     margin-bottom: 10px;
 }
 
+
 #authLabel
 {
     float: left;
+    text-align: left;
+    font-size: 14px;
 }
 
 #regHelpText1
@@ -277,21 +288,34 @@ body
     color: #41ccfa;
 }
 
-#submitButton
+#submitButton, #prevButton, #prevButton2, #nextButton1, #nextButton2
 {
     color: #ffffff;
+    background: transparent;
     border-color: #ffffff;
     font-size: 20px;
     width: 100%;
     margin-top: 20px;
 }
 
+#nextButton1:hover, #nextButton2:hover
+{
+    background: #41ccfa;
+    border-color: #41ccfa;
+}
+
+#prevButton:hover, #prevButton2:hover
+{
+    background: #de8c66;
+    border-color: #de8c66;
+}
+
 #submitButton:hover
 {
     /*background: #FD2F6F;*/
     /*border-color: #FD2F6F;*/
-    background: #41ccfa;
-    border-color: #41ccfa;
+    background: #70de66;
+    border-color: #70de66;
 }
 
 #footerDivider
@@ -321,7 +345,7 @@ body
 /*Handles mobile-specific views*/
 @media (max-width : 500px)
 {
-    #submitButton
+    #submitButton, #nextButton1, #prevButton
     {
         /*background: #FD2F6F;*/
         /*border-color: #FD2F6F;*/
