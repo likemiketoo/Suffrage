@@ -60,9 +60,12 @@ class Candidate(models.Model):
     # Full nam of candidate
     full_name = models.CharField(max_length=40, unique=True)
     # Self explanatory
+    description = models.TextField(default="No additional information to display.")
+
     state = models.CharField(max_length=2, default='VA')
     party = models.CharField(max_length=20)
     votes = models.IntegerField(default=0, editable=False)
+    avatar = models.ImageField(upload_to='candidate_images', default='candidate_images/placeholder.jpg')
 
     def __str__(self):
         return self.full_name

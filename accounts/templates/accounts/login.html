@@ -7,14 +7,24 @@
         </h2>
          <!-- When user clicks button, execute post request-->
 
-         <form method="post">
-             <!-- Django security token that expires on idle, needed for forms -->
-             {% csrf_token %}
-             <label for="InputEmail1" id="authLabel">Email address</label>
-             <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <form method="post">
+            <!-- Django security token that expires on idle, needed for forms -->
+            {% csrf_token %}
+            <label for="InputEmail1" id="authLabel">
+                Email address
+            </label>
+            <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small style="color:red;">
+                {{ login_form.email.errors }}
+            </small>
 
-             <label for="InputPassword1" id="authLabel">Password</label>
-             <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
+            <label for="InputPassword1" id="authLabel">
+                Password
+            </label>
+            <input type="password" name="password" class="form-control" id="InputPassword1" placeholder="Password">
+            <small style="color:red;" id="sma">
+                {{ login_form.password.errors }}
+            </small>
 
             <!-- If an error is raised, print it here -->
             {% for field in login_form %}
@@ -24,13 +34,6 @@
                         {{ field.help_text }}
                     </small>
                 {% endif %}
-
-                <!-- Shows errors if present-->
-                {% for error in field.errors %}
-                    <p style="color:red;">
-                        {{ error }}
-                    </p>
-                {% endfor %}
             {% endfor %}
 
             <!--If any non-field errors are present, do this-->
@@ -43,10 +46,13 @@
             {% endif %}
 
              <!-- When clicked, execute submit, and do form action -->
-            <button type="submit" class="btn btn-outline-primary" id="submitButton">
+            <button type="submit" class="btn btn-outline-primary" id="loginButton2">
                 Login
             </button>
-         </form>
+        </form>
+        <a href="{% url 'accounts:register' %}">
+            Not registered? Click here to register.
+        </a>
     </div>
 </div>
 {% endblock content%}

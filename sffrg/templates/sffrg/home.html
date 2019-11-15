@@ -1,15 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
- <div>
-    <a href="{% url 'sffrg:election' %}">
-        {{ test_string }}
+<div class="container-fluid" id="authenticationOuter">
+    <div class="container-fluid" id="authenticationBox">
+        <h2 id="homeTitle">
+            Welcome to SFFRG
+        </h2>
+        <h4 id="homeDescr">
+            SFFRG is an online voting platform with focused on usability and security.
+        </h4>
         {% if request.user.is_authenticated %}
-            <br>
-            {{ name }}
 
+            <a href="{% url 'sffrg:election' %}">
+                <button type="button" class="btn btn-outline-primary" id="beginButton">
+                    {{ test_string }}
+                </button>
+            </a>
         {% else %}
+            <div class="form-row" id="">
+                <div class="form-group col-6">
+                    <a href="{% url 'accounts:register' %}">
+                        <button type="button" class="btn btn-outline-primary" id="registerButton">
+                            Register
+                        </button>
+                    </a>
+                </div>
+                <div class="form-group col-6">
+                    <a href="{% url 'accounts:login' %}">
+                        <button type="button" class="btn btn-outline-primary" id="loginButton">
+                            Login
+                        </button>
+                    </a>
+                </div>
+            </div>
+
         {% endif %}
-    </a>
+    </div>
  </div>
 {% endblock content%}
 

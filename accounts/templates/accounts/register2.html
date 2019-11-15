@@ -6,16 +6,16 @@
             Registration
         </h2>
          <!-- When user clicks button, execute post request-->
-         <form method="post" id="firstReg" >
+        <form method="post" id="firstReg" >
             <!-- Django security token that expires on idle, needed for forms -->
             {% csrf_token %}
             <div id="form1">
                 <div class="form-row">
                     <div class="form-group col-4">
-                        <label for="InputNames" id="authLabel">
-                            First Name
+                        <label for="InputNamesf" id="authLabel">
+                            First Name *
                         </label>
-                        <input type="firstName" name="first_name" class="form-control" id="InputNamesf" placeholder="First Name">
+                        <input type="firstName" name="first_name" class="form-control" id="InputNamesf" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.first_name.errors }}
                         </small>
@@ -24,16 +24,16 @@
                         <label for="InputNames" id="authLabel">
                             Middle Name
                         </label>
-                        <input type="middleName" name="middle_name" class="form-control" id="InputNames" placeholder="Middle Name">
+                        <input type="middleName" name="middle_name" class="form-control" id="InputNames" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.middle_name.errors }}
                         </small>
                     </div>
                     <div class="form-group col-4">
                         <label for="InputNames" id="authLabel">
-                            Last Name
+                            Last Name *
                         </label>
-                        <input type="lastName" name="last_name" class="form-control" id="InputNames" placeholder="Last Name">
+                        <input type="lastName" name="last_name" class="form-control" id="InputNames" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.last_name.errors }}
                         </small>
@@ -43,11 +43,11 @@
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="InputEmail1" id="authLabel">
-                            Email address
+                            Email address *
                         </label>
-                        <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small>
-                            {{ registration_form.password2.errors }}
+                        <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="" value="{{registration_form.initial.email}}">
+                        <small style="color:red;">
+                            {{ registration_form.email.errors }}
                         </small>
                     </div>
                 </div>
@@ -55,9 +55,9 @@
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="InputUsername" id="authLabel">
-                            Username
+                            Username *
                         </label>
-                        <input type="username" name="username" class="form-control" id="InputUsername" aria-describedby="usernameHelp" placeholder="Username">
+                        <input type="username" name="username" class="form-control" id="InputUsername" aria-describedby="usernameHelp" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.username.errors }}
                         </small>
@@ -67,18 +67,18 @@
                 <div class="form-row">
                     <div class="form-group col-6">
                         <label for="InputPassword1" id="authLabel">
-                            Password
+                            Password *
                         </label>
-                        <input type="password" name="password1" class="form-control" id="InputPassword1" placeholder="Password">
+                        <input type="password" name="password1" class="form-control" id="InputPassword1" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.password1.errors }}
                         </small>
                     </div>
                     <div class="form-group col-6">
                         <label for="InputPassword1" id="authLabel">
-                            Password Confirmation
+                            Password Confirmation *
                         </label>
-                        <input type="password" name="password2" class="form-control" id="InputPassword1" placeholder="Confirm Password">
+                        <input type="password" name="password2" class="form-control" id="InputPassword1" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.password2.errors }}
                         </small>
@@ -91,8 +91,11 @@
                 <div class="form-row">
                     <div class="form-group col-8">
                         <label for="InputCitizen" id="authLabel">
-                            Are you a citizen of the United States Of America?
+                            Are you a citizen of the United States Of America? *
                         </label>
+                        <small id="citAlert" style="color:red;">
+                            {{ registration_form.citizen.errors }}
+                        </small>
                     </div>
                     <div class="form-group col-4">
                         <div class="form-check form-check-inline">
@@ -107,9 +110,6 @@
                                 No
                             </label>
                         </div>
-                        <small id="citAlert" style="color:red;">
-                            {{ registration_form.citizen.errors }}
-                        </small>
                     </div>
                 </div>
 
@@ -126,7 +126,7 @@
                         </div>
                         <div class="form-group col-4">
                             <label for="InputDob" id="authLabel">
-                                Date of Birth
+                                Date of Birth *
                             </label>
                             <input type="dob" name="dob" class="form-control" id="InputDob" placeholder="mm/dd/yyyy">
                             <small style="color:red;">
@@ -134,9 +134,9 @@
                             </small>
                         </div>
                         <div class="form-group col-4">
-                            <div class="form-group">
+                            <div class="form-group" id="fg">
                                 <label for="InputGender" id="authLabel">
-                                    Gender
+                                    Gender *
                                 </label>
                                 <select class="form-control" id="InputGender" name="gender">
                                     <option value="-">
@@ -162,8 +162,11 @@
                     <div class="form-row">
                         <div class="form-group col-8">
                             <label id="authLabel">
-                                Have you ever been convicted of a felony or judged mentally incapacitated and disqualified to vote?
+                                Have you ever been convicted of a felony or judged mentally incapacitated and disqualified to vote? *
                             </label>
+                            <small style="color:red;">
+                                {{ registration_form.disqualified.errors }}
+                            </small>
                         </div>
                         <div class="form-group col-4">
                             <div class="form-check form-check-inline">
@@ -178,9 +181,6 @@
                                     No
                                 </label>
                             </div>
-                            <small style="color:red;">
-                                {{ registration_form.disqualified.errors }}
-                            </small>
                         </div>
                     </div>
 
@@ -189,61 +189,60 @@
                             <label for="InputRestored" id="authLabel">
                                 Has your right to vote been restored?
                             </label>
+                            <small style="color:red;">
+                                {{ registration_form.restored.errors }}
+                            </small>
                         </div>
                         <div class="form-group col-4">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="restored" id="InputRestoredT" value="True" checked="checked">
+                                <input class="form-check-input" type="radio" name="restored" id="InputRestoredT" value="True">
                                 <label class="form-check-label" for="InputRestoredT">
                                     Yes
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="restored" id="InputRestoredF" value="False">
+                                <input class="form-check-input" type="radio" name="restored" id="InputRestoredF" value="False" checked="checked">
                                 <label class="form-check-label" for="InputRestoredF">
                                     No
                                 </label>
                             </div>
-                            <small style="color:red;">
-                                {{ registration_form.restored.errors }}
-                            </small>
                         </div>
                     </div>
 
                     <div class="form-row" id="military">
                         <div class="form-group col-8">
                             <label for="InputRestored" id="authLabel">
-                                Are you an active-duty uniformed services member, spouse or dependent, or an overseas citizen?
+                                Are you an active-duty uniformed services member, spouse or dependent, or an overseas citizen? *
                             </label>
+                            <small style="color:red;">
+                                {{ registration_form.active_mil.errors }}
+                            </small>
                         </div>
                         <div class="form-group col-4">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="active_mil" id="active_mil" value="True">
+                                <input class="form-check-input" type="radio" name="active_mil" id="active_milT" value="True">
                                 <label class="form-check-label" for="active_mil">
                                     Yes
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="active_mil" id="active_mil" value="False">
+                                <input class="form-check-input" type="radio" name="active_mil" id="active_milF" value="False">
                                 <label class="form-check-label" for="active_mil">
                                     No
                                 </label>
                             </div>
-                            <small style="color:red;">
-                                {{ registration_form.active_mil.errors }}
-                            </small>
                         </div>
                     </div>
-
                 </div>
             </div>
 
 
 
-             <div id="form3">
+            <div id="form3">
                 <div class="form-row">
                     <div class="form-group col-12">
                         <label for="InputStreet" id="authLabel">
-                            Address
+                            Address *
                         </label>
                         <input type="street" name="street" class="form-control" id="InputStreet" placeholder="Street">
                         <small style="color:red;">
@@ -254,7 +253,7 @@
                 <div class="form-row">
                     <div class="form-group col-4">
                         <label for="InputCity" id="authLabel">
-                            City
+                            City *
                         </label>
                         <input type="city" name="city" class="form-control" id="InputCity" placeholder="city">
                         <small style="color:red;">
@@ -263,17 +262,17 @@
                     </div>
                     <div class="form-group col-4">
                         <label for="InputZip" id="authLabel">
-                            Zip Code
+                            Zip Code *
                         </label>
-                        <input type="zipcode" name="zip_code" class="form-control" id="InputZip" placeholder="zip">
+                        <input type="zipcode" name="zip_code" class="form-control" id="InputZip" placeholder="">
                         <small style="color:red;">
                             {{ registration_form.zip_code.errors }}
                         </small>
                     </div>
                     <div class="form-group col-4">
-                        <div class="form-group">
+                        <div class="form-group" id="fg">
                             <label for="InputState" id="authLabel">
-                                State
+                                State *
                             </label>
                             <select class="form-control" id="InputState" name="state">
                                 <option value="-">-</option>
@@ -338,16 +337,16 @@
                 <div class="form-row" id="signature">
                     <div class="form-group col-11">
                         <label for="InputSignature" id="authLabel">
-                            By checking this box I confirm that all the information entered is accurate and provide my electronic signature:
+                            By checking this box I confirm that all the information entered is accurate and provide my electronic signature: *
                         </label>
+                        <small style="color:red;">
+                            {{ registration_form.sig.errors }}
+                        </small>
                     </div>
                     <div class="form-group col-1">
                         <input class="form-check-input" type="checkbox" name="sig" value="True" id="sig">
                         <label class="form-check-label" for="sig"></label>
                     </div>
-                    <small style="color:red;">
-                        {{ registration_form.sig.errors }}
-                    </small>
                 </div>
             </div>
 
@@ -376,9 +375,7 @@
             </div>
 
 
-
         </form>
-
 
     </div>
 </div>

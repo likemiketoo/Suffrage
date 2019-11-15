@@ -49,9 +49,9 @@ class CandidateAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('CANDIDATE INFO', {
-            'fields': ('election', 'position', 'full_name', 'state', 'party',),
+            'fields': ('election', 'position', 'full_name', 'state', 'party', 'avatar',),
         }
-         ),
+        ),
     ]
 
 
@@ -69,7 +69,7 @@ class CandidateInline(admin.TabularInline):
         (None, {
             'fields': ('election', 'full_name', 'state', 'party'),
         }
-         ),
+        ),
     ]
 
     def save_model(self, request, obj, form, change):

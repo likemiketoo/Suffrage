@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
- <div>
-    <ul>
+<div class="container-fluid" id="authenticationOuter">
+    <div class="container-fluid" id="authenticationBox">
+        <h2 id="">
+            Positions
+        </h2>
+
+<!--        {{ positions.0.title }}-->
         {% for position in positions %}
-            <li>
-                <a href="{% url 'sffrg:candidate' position.id %}">
+            <a href="{% url 'sffrg:candidate' position.id %}">
+                <button type="button" class="btn btn-outline-primary" id="elecButton">
                     {{ position.title }}
-                </a>
-            </li>
+                </button>
+            </a>
+
         {% endfor %}
-    </ul>
- </div>
+    </div>
+</div>
 {% endblock content%}

@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
- <div>
-    <ul>
+<div class="container-fluid" id="authenticationOuter">
+    <div class="container-fluid" id="authenticationBox">
+        <h2 id="">
+            {{ user.state }} Elections
+        </h2>
         {% for election in elections %}
-            <li>
-                <a href="{% url 'sffrg:position' election.id %}">
+            <a href="{% url 'sffrg:position' election.id %}">
+                <button type="button" class="btn btn-outline-primary" id="elecButton">
                     {{ election.title }}
-                    {{ election.total_votes }}
-                </a>
-                <br>
-                {{ positions }}
-                <br>
-                {{ num }}
-            </li>
+                    <!--{{ election.total_votes }}-->
+                </button>
+            </a>
+
         {% endfor %}
-    </ul>
+    </div>
  </div>
 {% endblock content%}

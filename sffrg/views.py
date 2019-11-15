@@ -47,17 +47,18 @@ def home_screen_view(request):
                 malicious_voter.delete()
 
         context = {
-            'test_string': "Working as intended! This is the home screen.",
+            'test_string': "Start Voting!",
         }
 
         return render(request, "sffrg/home.html", context)
     else:
-        return redirect('accounts:login')
+        # return redirect('accounts:login')
+        return render(request, "sffrg/home.html")
 
 
 def election_view(request):
     # Return the last ten published questions.
-    elections = Election.objects.order_by('title')[:10]
+    elections = Election.objects.order_by('title')[:5]
     elect = Election.objects.all()
     for elecs in elect:
         # candidates = Position.objects.get(election=elecs.id).candidate_set.all()

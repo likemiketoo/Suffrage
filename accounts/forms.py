@@ -45,9 +45,6 @@ class RegistrationForm(UserCreationForm):
         if dat.get('disqualified') == "True" and dat.get('restored') == "False":
             self.add_error('restored', "You cannot register to vote if your right to vote has not been restored.")
 
-        if dat.get('gender') == '-':
-            self.add_error('gender', "You must select an option")
-
         if dat.get('state') == "-":
             self.add_error('state', "You must select a state")
 
@@ -87,8 +84,8 @@ class AccountUpdateForm(forms.ModelForm):
     # Defines what aspects from a model this class is utilizing
     class Meta:
         model = Account
-        fields = ('email', 'username', 'zip_code')
-        readonly_fields = ('zip_code')
+        fields = ('email', 'username', 'street', 'city', 'zip_code', 'state')
+        readonly_fields = ('state')
 
 
     def clean_email(self):

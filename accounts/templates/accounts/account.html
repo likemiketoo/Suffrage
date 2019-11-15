@@ -1,51 +1,128 @@
 {% extends 'base.html' %}
 {% block content %}
- <div>
-    <h2>
-        Account Page
-    </h2>
-     <!-- When user clicks button, execute post request-->
-     <form method="post">
-         <!-- Django security token that expires on idle, needed for forms -->
-         {% csrf_token %}
-
-         {% for field in account_form %}
-            <p>
-                {{ field.label_tag }}
-                {{ field }}
-            </p>
-
-            <!-- If the field has help text, display it -->
-            {% if field.help_text %}
-                <small style="color:grey;">
-                    {{ field.help_text }}
-                </small>
-            {% endif %}
-        {% endfor %}
-
-        <!-- If an error is raised, print it here -->
-        {% for field in account_form %}
-            {% for error in field.errors %}
-                <p style="color:red;">
-                    {{ error }}
-                </p>
-            {% endfor %}
-        {% endfor %}
-
-        <!-- Shows errors if present-->
-        <!--If any non-field errors are present, do this-->
-        {% if account_form.non_field_errors %}
-            <div style="color:red;">
-                <p>
-                    {{ account_form.non_field_errors }}
-                </p>
+<div class="container-fluid" id="authenticationOuter">
+    <div class="container-fluid" id="authenticationBox">
+        <h2>
+            Account Page
+        </h2>
+         <!-- When user clicks button, execute post request-->
+        <h3 id="greeting">
+            Hello, {{ user.first_name }} {{ user.last_name }}
+        </h3>
+        <form method="post">
+             <!-- Django security token that expires on idle, needed for forms -->
+            {% csrf_token %}
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    Email:
+                </div>
+                <div class="form-group col-9">
+                    <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="" value="{{account_form.initial.email}}">
+                    <small style="color:red;">
+                        {{ account_form.email.errors }}
+                    </small>
+                </div>
             </div>
-        {% endif %}
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    Username:
+                </div>
+                <div class="form-group col-9">
+                    <input type="username" name="username" class="form-control" id="InputUsername" aria-describedby="usernameHelp" placeholder="" value="{{account_form.initial.username}}">
+                    <small style="color:red;">
+                        {{ account_form.username.errors }}
+                    </small>
+                </div>
+            </div>
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    Address:
+                </div>
+                <div class="form-group col-9">
+                    <input type="street" name="street" class="form-control" id="InputStreet" placeholder="Street" value="{{account_form.initial.street}}">
+                    <small style="color:red;">
+                        {{ account_form.street.errors }}
+                    </small>
+                </div>
+            </div>
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    City:
+                </div>
+                <div class="form-group col-9">
+                    <input type="city" name="city" class="form-control" id="InputCity" placeholder="city" value="{{account_form.initial.city}}">
+                    <small style="color:red;">
+                        {{ account_form.city.errors }}
+                    </small>
+                </div>
+            </div>
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    Zip Code:
+                </div>
+                <div class="form-group col-9">
+                    <input type="zipcode" name="zip_code" class="form-control" id="InputZip" placeholder="" value="{{account_form.initial.zip_code}}">
+                    <small style="color:red;">
+                        {{ account_form.zip_code.errors }}
+                    </small>
+                </div>
+            </div>
+            <div class="form-row" id="">
+                <div class="form-group col-3">
+                    State:
+                </div>
+                <div class="form-group col-9" style="text-align:left;">
+                    {{account_form.initial.state}}
+                    <small style="color:red;">
+                        {{ account_form.state.errors }}
+                    </small>
+                </div>
+            </div>
 
-         <!-- When clicked, execute submit, and do form action -->
-        <button type="submit">
-            Save Changes
-        </button>
-     </form>
+
+<!--            {% for field in account_form %}-->
+<!--            <div class="form-row" id="">-->
+<!--                <div class="form-group col-4">-->
+<!--                    {{ field.label_tag }}-->
+<!--                </div>-->
+<!--                <div class="form-group col-8">-->
+<!--                    <input type="firstName" name="first_name" class="form-control" id="InputNamesf" placeholder="">-->
+<!--                    {{ field }}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--               -->
+<!--                &lt;!&ndash; If the field has help text, display it &ndash;&gt;-->
+<!--                {% if field.help_text %}-->
+<!--                    <small style="color:grey;">-->
+<!--                        {{ field.help_text }}-->
+<!--                    </small>-->
+<!--                {% endif %}-->
+<!--            {% endfor %}-->
+
+<!--            &lt;!&ndash; If an error is raised, print it here &ndash;&gt;-->
+<!--            {% for field in account_form %}-->
+<!--                {% for error in field.errors %}-->
+<!--                    <p style="color:red;">-->
+<!--                        {{ error }}-->
+<!--                    </p>-->
+<!--                {% endfor %}-->
+<!--            {% endfor %}-->
+
+            <!-- Shows errors if present-->
+            <!--If any non-field errors are present, do this-->
+<!--            {% if account_form.non_field_errors %}-->
+<!--                <div style="color:red;">-->
+<!--                    <p>-->
+<!--                        {{ account_form.non_field_errors }}-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            {% endif %}-->
+
+             <!-- When clicked, execute submit, and do form action -->
+            <button type="submit" class="btn btn-outline-primary" id="acctSubmitButton">
+                Save Changes
+            </button>
+        </form>
+    </div>
  </div>
 {% endblock content%}

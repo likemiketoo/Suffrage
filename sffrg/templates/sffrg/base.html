@@ -8,6 +8,8 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'sffrg/style.css' %}">
 
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+
         <title>
             SFFRG
         </title>
@@ -30,6 +32,22 @@
                         SFFRG
                     </div>
                 </a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout' %}" id="inlineLogout">
+                        <button type="button" class="btn btn-outline-primary" id="logoutButton">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </a>
+                    <a href="{% url 'accounts:account' %}" id="inlineAccount">
+                        <button type="button" class="btn btn-outline-primary" id="accountButton">
+                            <i class="fas fa-user-circle"></i>
+                            Profile
+                        </button>
+                    </a>
+                {% else %}
+
+                {% endif %}
             </div>
 
 
@@ -46,13 +64,13 @@
                     {% if request.user.is_authenticated %}
                         <li>
                             <a href="{% url 'accounts:account' %}">
-                                <i class="fas fa-users"></i>
+                                <i class="fas fa-user-circle"></i>
                                 Profile
                             </a>
                         </li>
                         <li>
                             <a href="{% url 'logout' %}">
-                                <i class="fas fa-handshake"></i>
+                                <i class="fas fa-sign-out-alt"></i>
                                 Logout
                             </a>
                         </li>

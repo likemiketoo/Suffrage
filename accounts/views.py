@@ -43,6 +43,7 @@ def registration_view(request):
             # account = authenticate(email=email, password=raw_password, first_name=first_name, last_name=last_name, username=username, zip_code=zip_code, dob=dob)
             # Send that information as a login request
             login(request, account, backend='django.contrib.auth.backends.ModelBackend')
+
             # If login is successful go to homepage
             return redirect('sffrg:home')
         else:
@@ -103,12 +104,16 @@ def account_view(request):
             form.save()
     else:
         # Presents what the user's current account information is
+
         form = AccountUpdateForm(
             initial=
             {
                 "email": request.user.email,
                 "username": request.user.username,
+                "street": request.user.street,
+                "city": request.user.city,
                 "zip_code": request.user.zip_code,
+                "state": request.user.state,
 
                 # Add other authentication information here
             }

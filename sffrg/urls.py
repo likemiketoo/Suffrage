@@ -1,10 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
-import random
 from . import views
-
-ran = random.randrange(0, 999, 2)
 
 app_name = 'sffrg'
 urlpatterns = [
@@ -18,3 +15,4 @@ urlpatterns = [
     # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     # path('<int:question_id>/vote/', views.vote, name='vote'),
 ]
+
