@@ -23,26 +23,15 @@
                                         Learn More
                                     </button>
                                 </p>
-
-                                <button class="btn btn-primary" id="candVote">
-                                    Vote
-                                </button>
+                                <a href="{% url 'sffrg:vote' candidate.id %}">
+                                    <button class="btn btn-primary" id="candVote">
+                                        Vote
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-<!--                {% for candidate in candidates %}-->
-<!--                    <div class="col-6">-->
-<!--                        <div class="card" style="width: 18rem;">-->
-<!--                            <img src="{{ candidate.avatar.url }}" alt="...">-->
-<!--                            <div class="card-body">-->
-<!--                                <h5 class="card-title">{{ candidate.full_name }}</h5>-->
-<!--                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--                                <a href="#" class="btn btn-primary">Go somewhere</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                {% endfor %}-->
             </div>
 
 <!--            <form id="link" method="POST">-->

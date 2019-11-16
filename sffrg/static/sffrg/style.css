@@ -555,6 +555,14 @@ ul
 #candVote
 {
     margin-top: 10px;
+    background: #4DCD42;
+    border-color: #4dcd42;
+}
+
+#candVote:hover
+{
+    background: #4BBD40;
+    border-color: #4BBD40;
 }
 
 .modal-body
@@ -591,9 +599,35 @@ ul
     text-align: left;
 }
 
-#descriptionModal
+#confirmText
 {
-    /*z-index: 1;*/
+    font-size: 20px;
+}
+
+#confCandImg
+{
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    margin: auto;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+#voteConf
+{
+    margin-top: 15px;
+    background: #4DCD42;
+    border-color: #4dcd42;
+    width: 200px;
+}
+
+#voteConf:hover
+{
+    background: #4BBD40;
+    border-color: #4BBD40;
 }
 
 #footerDivider

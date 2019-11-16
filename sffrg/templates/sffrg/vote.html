@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
- <div>
-    <ul>
-        <li>
-            {% if voted == 0 %}
-                <form method=POST action="">
-                    {% csrf_token %}
-                     {{ position_id }}
-                    Confirm vote for {{ selected_candidate.full_name }}?
-                    <button type="submit" value="confirm_candidate" onclick="confirmVote()">
-                        Confirm
-                    </button>
-                </form>
-            {% elif voted == 1 %}
-                Your vote has been counted for this position!
+<div class="container-fluid" id="authenticationOuter">
+    <div class="container-fluid" id="authenticationBox">
+        <h2 id="">
+            Confirmation
+        </h2>
+        {% if voted == 0 %}
+            <form method=POST action="">
+                {% csrf_token %}
+                 {{ position_id }}
+                <h2 id="confirmText">
+                    Confirm vote for {{ selected_candidate.state }} {{ selected_candidate.party }} candidate <b>{{ selected_candidate.full_name }}</b>?
+                </h2>
+                <img src="{{ selected_candidate.avatar.url }}" id="confCandImg">
                 <br>
-            {% endif %}
-        </li>
-    </ul>
- </div>
+                <button type="submit" class="btn btn-primary" value="confirm_candidate" onclick="confirmVote()" id="voteConf">
+                    Confirm
+                </button>
+            </form>
+        {% elif voted == 1 %}
+            Your vote has already been counted for this position!
+            <br>
+        {% endif %}
+    <div>
+</div>
 <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script type = "text/javascript">
    function confirmVote()
