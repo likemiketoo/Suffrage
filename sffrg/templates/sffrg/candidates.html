@@ -7,29 +7,30 @@
         </h2>
         {% if voted == 0 %}
             <div class="form-row">
-                <div class="col-6">
-                    <div class="card" id="candidateCard">
-                        <img src="{{ candidates.2.avatar.url }}" id="candImg">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                {{ candidates.2.full_name }}
-                            </h5>
-                            <p class="card-text">
-                                {{ candidates.2.state }} {{ candidates.2.party }} Candidate
-                            </p>
-                            <p id="lmP">
-                                <a href="#" id="learnMore" data-toggle="modal" data-target="#descriptionModal">
-                                    Learn More
-                                </a>
-                            </p>
+                {% for candidate in candidates %}
+                    <div class="col-6" id="candidateColumns">
+                        <div class="card" id="candidateCard">
+                            <img src="{{ candidate.avatar.url }}" id="candImg">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ candidate.full_name }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ candidate.state }} {{ candidate.party }} Candidate
+                                </p>
+                                <p id="lmP">
+                                    <button href="#" class="btn btn-primary" id="learnMore" data-toggle="modal" data-target='#{{candidate.full_name|cut:" "}}'>
+                                        Learn More
+                                    </button>
+                                </p>
 
-                            <br>
-                            <button class="btn btn-primary">
-                                Select
-                            </button>
+                                <button class="btn btn-primary" id="candVote">
+                                    Vote
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
 <!--                {% for candidate in candidates %}-->
 <!--                    <div class="col-6">-->
 <!--                        <div class="card" style="width: 18rem;">-->
@@ -63,31 +64,38 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="descriptionModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    Modal title
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Modal text here
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Save changes
-                </button>
+{% for candidate in candidates %}
+    <div class="modal fade" id="{{candidate.full_name|cut:" "}}" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="{{ candidate.avatar.url }}" id="modalImg">
+                    <h5 class="modal-title" id="ModalLabel">
+                        {{candidate.full_name}} - {{candidate.party}} Candidate
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{candidate.description|safe}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    {% if candidate.website  %}
+                        <a href="{{candidate.website}}">
+                            <button type="button" class="btn btn-primary">
+                                Go to website
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
+{% endfor %}
 
 <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script type = "text/javascript">
@@ -95,7 +103,7 @@
    {
         var ele = document.getElementsByName('choice');
 
-        for(i = 0; i < ele.length; i++)
+        for(var i = 0; i < ele.length; i++)
         {
             if(ele[i].checked)
             {

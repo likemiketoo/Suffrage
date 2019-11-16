@@ -61,7 +61,7 @@ class Candidate(models.Model):
     full_name = models.CharField(max_length=40, unique=True)
     # Self explanatory
     description = models.TextField(default="No additional information to display.")
-
+    website = models.CharField(max_length=60, blank=True)
     state = models.CharField(max_length=2, default='VA')
     party = models.CharField(max_length=20)
     votes = models.IntegerField(default=0, editable=False)

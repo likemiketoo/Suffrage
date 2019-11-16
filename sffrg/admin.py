@@ -5,6 +5,7 @@ from django.contrib import admin
 from accounts.forms import AccountCreationForm
 from accounts.models import Account
 from sffrg.models import Election, Candidate, Position
+from tinymce.widgets import TinyMCE
 
 # admin.site.register(Election)
 
@@ -49,10 +50,15 @@ class CandidateAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('CANDIDATE INFO', {
-            'fields': ('election', 'position', 'full_name', 'state', 'party', 'avatar',),
+            'fields': ('election', 'position', 'full_name', 'state', 'party', 'description', 'website', 'avatar',),
         }
         ),
     ]
+
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE(attrs={'cols': 80, 'rows': 30})},
+        # forms.ChoiceField: {'choices': ('President', 'Vice President', 'Secretary', 'Treasurer')},
+    }
 
 
 class CandidateInline(admin.TabularInline):
@@ -74,7 +80,7 @@ class CandidateInline(admin.TabularInline):
 
     def save_model(self, request, obj, form, change):
         obj.position = Position.objects.first()
-        super().save_model(request, obj, form, change)
+        super(CandidateInline, self).save(request, obj, form, change)
 
     # Makes text box entry fields smaller
     formfield_overrides = {

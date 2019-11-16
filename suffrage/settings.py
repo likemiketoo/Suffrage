@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Additional apps
     'encrypted_model_fields',
+    'tinymce',
+
 ]
 
 MIDDLEWARE = [
