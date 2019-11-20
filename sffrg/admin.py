@@ -13,23 +13,24 @@ from tinymce.widgets import TinyMCE
 # Defines what user attributes are displayed and editable on the admin page
 class AccountAdmin(UserAdmin):
     add_form = AccountCreationForm
-    list_display = ('email', 'username', 'date_joined', 'last_login', 'is_admin',)
+    list_display = ('email', 'username', 'state', 'date_joined', 'last_login', 'is_admin',)
     search_fields = ('email', 'username',)
 
+    readonly_fields = ('state',)
     # Only allows certain fields to be editable on creation
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return ['dob']
+            return ['dob', 'state']
         else:
             return []
 
-    readonly_fields = ('date_joined', 'last_login', 'dob',)
+    readonly_fields = ('date_joined', 'last_login', 'dob', 'state', 'gender')
 
     filter_horizontal = ()
     list_filter = ()
     fieldsets = [
         ('USER INFO', {
-            'fields': ('email', 'first_name', 'last_name', 'username', 'zip_code', 'dob',),
+            'fields': ('email', 'first_name', 'middle_name', 'last_name', 'username', 'gender', 'street', 'city', 'zip_code', 'state', 'dob',),
                 }
          ),
     ]
@@ -37,7 +38,7 @@ class AccountAdmin(UserAdmin):
     add_fieldsets = [
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'first_name', 'last_name', 'username', 'zip_code', 'dob')}
+            'fields': ('email', 'password1', 'password2', 'first_name', 'middle_name', 'last_name', 'username', 'gender', 'street', 'city', 'state', 'zip_code', 'dob', 'citizen', 'disqualified', 'active_mil', 'sig')}
          ),
     ]
 

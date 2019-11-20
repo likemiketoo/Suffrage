@@ -1,33 +1,14 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-# from cryptography.hazmat.backends import default_backend
-# from cryptography.hazmat.primitives import serialization, hashes
-# from cryptography.hazmat.primitives.asymmetric import padding
 from django.core.signing import Signer
-from encrypted_model_fields.fields import EncryptedCharField, EncryptedTextField, EncryptedDateField, EncryptedBooleanField
-
-
-# with open("E:\Grad Project\suffrage\sffrg\key.pem", "rb") as key_file:
-#     private_key = serialization.load_pem_private_key(
-#         key_file.read(),
-#         password=None,
-#         backend=default_backend()
-#     )
-#
-# # Derives private key from public key
-# public_key = private_key.public_key()
-#
-# pub = private_key.public_key().public_bytes(
-#     encoding=serialization.Encoding.PEM,
-#     format=serialization.PublicFormat.SubjectPublicKeyInfo
-# )
+from encrypted_model_fields.fields import EncryptedCharField, EncryptedTextField, EncryptedDateField
 
 
 # Defines how both users and superusers(admins) are handled
 class MyAccountManager(BaseUserManager):
     # Defines what happens when a new user is created
-    def create_user(self, first_name, last_name, email, username, zip_code, dob, password=None):
+    def create_user(self, first_name, middle_name, last_name, email, username, gender, street, city, zip_code, state, dob, disqualified, active_mil, sig, password=None):
         # Raises flag if no email or username is present
         if not email:
             raise ValueError("Users must have a valid email address")
@@ -38,9 +19,17 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             first_name=first_name,
+            middle_name=middle_name,
             last_name=last_name,
+            dob=dob,
+            gender=gender,
+            street=street,
+            city=city,
+            state=state,
+            disqualified=disqualified,
+            active_mil=active_mil,
+            sig=sig,
             zip_code=zip_code,
-            dob=dob
         )
 
         # Sets and saves password
@@ -49,15 +38,23 @@ class MyAccountManager(BaseUserManager):
         return user
 
     # Creates superuser
-    def create_superuser(self, first_name, last_name, email, username, zip_code, dob, password):
+    def create_superuser(self, first_name, middle_name, last_name, email, username, gender, street, city, zip_code, state, dob, disqualified, active_mil, sig, password):
         user = self.create_user(
             email=self.normalize_email(email),
             username=username,
-            password=password,
             first_name=first_name,
+            middle_name=middle_name,
             last_name=last_name,
+            dob=dob,
+            gender=gender,
+            street=street,
+            city=city,
+            state=state,
+            disqualified=disqualified,
+            active_mil=active_mil,
+            sig=sig,
             zip_code=zip_code,
-            dob=dob
+            password=password
         )
         user.is_admin = True
         user.is_staff = True
@@ -90,14 +87,14 @@ class Account(AbstractBaseUser):
     state = EncryptedCharField(max_length=2, choices=STATE_CHOICES)
     zip_code = EncryptedCharField(max_length=5, blank=True, null=True)
     dob = EncryptedDateField(verbose_name="date of birth", auto_now=False, auto_now_add=False)
-    citizen = EncryptedCharField(max_length=5, default=True)
+    citizen = EncryptedCharField(max_length=5, default=True, choices=BOOLEAN_CHOICES)
     # ssn = EncryptedCharField(max_length=9, unique=True)
     ssn = EncryptedCharField(max_length=9, blank=True, null=True)
     gender = models.CharField(max_length=23, choices=GENDER_CHOICES, default="Prefer Not To Disclose")
-    disqualified = EncryptedCharField(max_length=5, default=False)
-    restored = EncryptedCharField(max_length=5, default=False, null=True, blank=True)
-    active_mil = EncryptedCharField(max_length=5)
-    sig = EncryptedCharField(max_length=5, default=False)
+    disqualified = EncryptedCharField(max_length=5, default=False, choices=BOOLEAN_CHOICES)
+    restored = EncryptedCharField(max_length=5, default=False, null=True, blank=True, choices=BOOLEAN_CHOICES)
+    active_mil = EncryptedCharField(max_length=5, choices=BOOLEAN_CHOICES)
+    sig = EncryptedCharField(max_length=5, default=False, choices=BOOLEAN_CHOICES)
 
     # Required for AbstractBaseUser
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
@@ -109,7 +106,7 @@ class Account(AbstractBaseUser):
 
     # Defines what is used for authentication and what is required
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'zip_code', 'dob']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username', 'zip_code', 'dob', 'street', 'city', 'state', 'gender', 'disqualified', 'active_mil', 'sig']
 
     objects = MyAccountManager()
 
