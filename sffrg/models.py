@@ -69,3 +69,4 @@ class Candidate(models.Model):
 
     def __str__(self):
         return self.full_name
+        # return self

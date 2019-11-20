@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, F
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -154,7 +154,8 @@ def vote(request, candidate_signed):
         voted = 0
         if request.method == "POST":
             voted = 1
-            selected_candidate.votes += 1
+            # selected_candidate.votes += 1
+            selected_candidate.votes = F('votes') + 1
             selected_candidate.save()
             vu = VotedUsers(id=user, position=position_id)
             vu.save()

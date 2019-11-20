@@ -11,6 +11,7 @@
                  {{ position_id }}
                 <h2 id="confirmText">
                     Confirm vote for {{ selected_candidate.state }} {{ selected_candidate.party }} candidate <b>{{ selected_candidate.full_name }}</b>?
+                    <!--{{ selected_candidate.election.id }}-->
                 </h2>
                 <img src="{{ selected_candidate.avatar.url }}" id="confCandImg">
                 <br>
@@ -19,12 +20,24 @@
                 </button>
             </form>
         {% elif voted == 1 %}
-            Your vote has already been counted for this position!
+            Your vote has been counted for this position!
             <br>
+            <a href="{% url 'sffrg:position' selected_candidate.election.id %}">
+                <button type="button" class="btn btn-outline-primary" id="elecButton">
+                    Vote again
+                </button>
+            </a>
+            <a href="{% url 'sffrg:election' %}">
+                <button type="button" class="btn btn-outline-primary" id="elecButtonR">
+                    Return to homepage
+                </button>
+             </a>
+
+            <!--{{ selected_candidate.election }}-->
         {% endif %}
-    <div>
+    </div>
 </div>
-<script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script type = "text/javascript">
    function confirmVote()
    {

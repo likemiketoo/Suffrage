@@ -447,7 +447,7 @@ ul
     margin-top: 20px;
 }
 
-#elecButton
+#elecButton, #elecButtonR
 {
     background: #48bf3d;
     border-color: #48bf3d;
@@ -456,9 +456,10 @@ ul
     font-size: 20px;
     width: 100%;
     margin-top: 20px;
+
 }
 
-#elecButton:hover
+#elecButton:hover, #elecButtonR:hover
 {
     background: #70de66;
     border-color: #70de66;
@@ -699,6 +700,11 @@ ul
     {
         background: #70de66;
         border-color: #70de66;
+    }
+
+    #elecButtonR
+    {
+        line-height: 20px;
     }
 
     #loginButton2
