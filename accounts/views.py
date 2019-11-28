@@ -46,12 +46,14 @@ def registration_view(request):
 
             # If login is successful go to homepage
             return redirect('sffrg:home')
+            # return render(request, "sffrg/home.html")
         else:
             context['registration_form'] = form
     # If it's not a POST request, it's a GET request which means they're visiting the page for the first time
     else:
         form = RegistrationForm()
         context['registration_form'] = form
+        # login(request, context, backend='django.contrib.auth.backends.ModelBackend')
     return render(request, 'accounts/register2.html', context)
 
 

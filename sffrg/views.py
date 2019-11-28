@@ -28,23 +28,23 @@ def home_screen_view(request):
     user = request.user
     vu = VotedUsers.objects.all()
     if user.is_authenticated:
-
-        # Checks to see if any inputs have been tampered and fail unsigning, and removes them
-        for voters in vu:
-            try:
-                test = signer.unsign(voters.id)
-            except signing.BadSignature:
-                malicious_voter = VotedUsers.objects.get(id=voters.id)
-                malicious_voter.delete()
-
-        # Checks to see if theres any values that passed signing, but aren't from registed users and removes them
-        for voters in vu:
-            original_id = signer.unsign(voters.id)
-            if Account.objects.filter(id=original_id).exists():
-                pass
-            else:
-                malicious_voter = VotedUsers.objects.get(id=voters.id)
-                malicious_voter.delete()
+    #
+    #     # Checks to see if any inputs have been tampered and fail unsigning, and removes them
+    #     for voters in vu:
+    #         try:
+    #             test = signer.unsign(voters.id)
+    #         except signing.BadSignature:
+    #             malicious_voter = VotedUsers.objects.get(id=voters.id)
+    #             malicious_voter.delete()
+    #
+    #     # Checks to see if theres any values that passed signing, but aren't from registed users and removes them
+    #     for voters in vu:
+    #         original_id = signer.unsign(voters.id)
+    #         if Account.objects.filter(id=original_id).exists():
+    #             pass
+    #         else:
+    #             malicious_voter = VotedUsers.objects.get(id=voters.id)
+    #             malicious_voter.delete()
 
         context = {
             'test_string': "Start Voting!",
@@ -52,7 +52,6 @@ def home_screen_view(request):
 
         return render(request, "sffrg/home.html", context)
     else:
-        # return redirect('accounts:login')
         return render(request, "sffrg/home.html")
 
 
@@ -77,7 +76,7 @@ def election_view(request):
 
 def position_view(request, election_id):
     election_id = election_id
-    # election_rand = random.randrange(0, 999, 2)
+
     signer = Signer(request.user.id)
     election_signed = signer.sign(election_id)
     # election_unsigned = signer.unsign(election_signed)
@@ -160,12 +159,35 @@ def vote(request, candidate_signed):
             vu = VotedUsers(id=user, position=position_id)
             vu.save()
 
-    context = {
-        'selected_candidate': selected_candidate,
-        'user': user,
-        'pos': position_id,
-        'voted': voted,
-    }
+    # vu = VotedUsers.objects.all()
+    # if user.is_authenticated:
+    #     # Checks to see if any inputs have been tampered and fail unsigning, and removes them
+    #     for voters in vu:
+    #         try:
+    #             test = signer.unsign(voters.id)
+    #         except signing.BadSignature:
+    #             malicious_voter = VotedUsers.objects.get(id=voters.id)
+    #             malicious_voter.delete()
+    #
+    #     # Checks to see if theres any values that passed signing, but aren't from registed users and removes them
+    #     for voters in vu:
+    #         original_id = signer.unsign(voters.id)
+    #         if Account.objects.filter(id=original_id).exists():
+    #             pass
+    #         else:
+    #             malicious_voter = VotedUsers.objects.get(id=voters.id)
+    #             malicious_voter.delete()
+    #
+    #     return render(request, "sffrg/home.html", context)
+    # else:
+    #     return render(request, "sffrg/home.html")
+    #
+    # context = {
+    #     'selected_candidate': selected_candidate,
+    #     'user': user,
+    #     'pos': position_id,
+    #     'voted': voted,
+    # }
     return render(request, "sffrg/vote.html", context, candidate_signed)
 
 

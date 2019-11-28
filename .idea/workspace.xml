@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e9409e5-d1b8-4af9-ac36-356a86e66381" name="Default Changelist" comment="Updated database model for candidates and elections, as well as admin page">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/likem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/likem.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sffrg/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/static/sffrg/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sffrg/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/sffrg/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +148,12 @@
       <workItem from="1573840889141" duration="31232000" />
       <workItem from="1574030151399" duration="648000" />
       <workItem from="1574127077935" duration="18533000" />
-      <workItem from="1574234035806" duration="2983000" />
+      <workItem from="1574234035806" duration="3487000" />
+      <workItem from="1574278578979" duration="2787000" />
+      <workItem from="1574467815115" duration="2027000" />
+      <workItem from="1574705864449" duration="4334000" />
+      <workItem from="1574711322727" duration="1894000" />
+      <workItem from="1574739033930" duration="980000" />
     </task>
     <task id="LOCAL-00001" summary="Updated database model for candidates and elections, as well as admin page">
       <created>1569910168279</created>
